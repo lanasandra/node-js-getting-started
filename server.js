@@ -27,7 +27,7 @@ app.post('/', function(req, res){
         //watch for any connect issues
         if (err) console.log(err);
 
-        var query = 'INSERT password__c INTO salesforce.contact WHERE email='+req.body.user.email;
+        var query = 'INSERT password__c INTO Contact WHERE email='+req.body.user.email;
         client.query(query);
         console.log(req.body.user.password);
         console.log(req.body.user.email);

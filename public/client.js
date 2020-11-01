@@ -7,8 +7,10 @@ const registerButton = document.getElementById('registerButton');
 var emailInput;
 var passwordCreated;
 registerButton.addEventListener('click', function(e) {
-
-  console.log('button was clicked');
+   emailInput = emailRegisterInput.value;
+   passwordCreated = passwordRegisterInput.value;
+  
+   console.log('button was clicked');
 
   fetch('/', {
     method: 'POST',
@@ -16,10 +18,10 @@ registerButton.addEventListener('click', function(e) {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        user: {
-            password: passwordRegisterInput.value,
-            email: emailInput.value
-        }
+        
+    password: passwordCreated,
+    email: emailInput
+    
     })
 })
   
