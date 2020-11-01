@@ -1,8 +1,9 @@
 const express = require('express');
 var bodyParser = require('body-parser');
-var pg = require('pg');
+const pg = require('pg');
 const app = express();
 
+const connectionString = process.env.DATABASE_URL;
 app.set('port', process.env.PORT || 5432);
 
 app.use(express.static('public'));
@@ -35,9 +36,13 @@ app.get('/', (req, res) => {
 
 // Example
 app.post('/save', (request, response) => {
-    pg.connect(connectionString, function (err, client, done) {
-    var query = 'UPDATE salesforce.Contact SET Password__c ='+request.body.passwordCreated+'WHERE Email='+request.body.emailInput;
-    pg.query(query);
+    const client = new pg.Client(connectionString);
+    client.connect();
+    const query = client.query('UPDATE salesforce.Contact SET Password__c ='+request.body.passwordCreated+'WHERE Email='+request.body.emailInput);
+    query.on('end', () => { 
+        client.end(); 
+    });
+    
     console.log(request.body)
     console.log('I got a request')
     console.log('Email: '+request.body.emailInput,'Password: '+request.body.passwordCreated)
@@ -45,9 +50,9 @@ app.post('/save', (request, response) => {
        status: 'success',
        Email : emailInput,
        Password : passwordCreated 
-        })
     })
 })
+
 
 
 // Access the parse results as request.body
