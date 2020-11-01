@@ -13,34 +13,46 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
   });
 
+  const { Client } = require('pg');
+
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
+  
+  client.connect();
+
+
 app.post('/register', function(req, res) {
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        // watch for any connect issues
+  pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+        //watch for any connect issues
         if (err) console.log(err);
-        conn.query(
-            'UPDATE salesforce.Contact SET Password__c = $4 WHERE LOWER(Email) = LOWER($3)',
-            [req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
-            function(err, result) {
-                if (err != null || result.rowCount == 0) {
-                  conn.query('INSERT INTO salesforce.Contact (Phone, MobilePhone, FirstName, LastName, Email) VALUES ($1, $2, $3, $4, $5)',
-                  [req.body.phone.trim(), req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
-                  function(err, result) {
-                    done();
-                    if (err) {
-                        res.status(400).json({error: err.message});
-                    }
-                    else {
-                        // this will still cause jquery to display 'Record updated!'
-                        // eventhough it was inserted
-                        res.json(result);
-                    }
+       client.query(
+           'INSERT INTO Contact (Email) VALUES ($4) WHERE LOWER(email) = LOWER($3)',
+           [req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
+           function(err, result) {
+           if (err != null || result.rowCount == 0) {
+              client.query('INSERT INTO salesforce.Contact (Phone, MobilePhone, FirstName, LastName, Email) VALUES ($1, $2, $3, $4, $5)',
+                 [req.body.phone.trim(), req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
+                function(err, result) {
+                 done();
+              if (err) {
+                 res.status(400).json({error: err.message});
+                 }
+               else {
+                      //this will still cause jquery to display 'Record updated!'
+                         //eventhough it was inserted
+                      res.json(result);
+                 }
                   });
+             }
+               else {
+                   done();
+                   res.json(result);
                 }
-                else {
-                    done();
-                    res.json(result);
-                }
-            }
+           }
         );
     });
 });
