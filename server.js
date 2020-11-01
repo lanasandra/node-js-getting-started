@@ -13,20 +13,10 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
   });
 
-  const { Client } = require('pg');
-
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
-  });
-  
-  client.connect();
-
+  const connectionString = "postgres://fssmfnipgcsobv:93036b8a23651dd59b8dd659b0a6af82d8e72992a2c0296212e87e9b2a46d80e@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d47lq5l2er5rkb"
 
 app.post('/register', function(req, res) {
-  pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+  pg.connect(connectionString, function (err, client, done) {
         //watch for any connect issues
         if (err) console.log(err);
        client.query(
