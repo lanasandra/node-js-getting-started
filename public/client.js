@@ -17,25 +17,35 @@ registerButton.addEventListener('click', function(e) {
    
 
    const data = {emailInput, passwordCreated};
-    
-   fetch('/save', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-    
-    })
-    
-    .then(response => {
 
-        console.log(response);
+   fetch('/getContact', {
+       method: 'GET'
+
+   })
+   .then((resp) => resp.json()) // Transform the data into json
+   .then(function(data) {
+    console.log(data);
+     })
 
 
-    })
+   //fetch('/save', {
+    //method: 'POST',
+    //headers: {
+      //  'Content-Type': 'application/json'
+    //},
+    //body: JSON.stringify(data)
+    
+    //})
+    
+    ///.then(response => {
+
+       // console.log(response);
+
+
+})
 
    
-})
+//})
 
 //setInterval(function() {
   //fetch('/clicks', {method: 'GET'})

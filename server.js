@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 const pg = require('pg');
 const app = express();
 
-const connectionString = process.env.DATABASE_URL;
 app.set('port', process.env.PORT || 5432);
 
 app.use(express.static('public'));
@@ -20,15 +19,14 @@ app.get('/', (req, res) => {
   });
   const { Pool } = require('pg'); 
   const env = process.env.NODE_ENV || 'development';
-  let connectionString = {
-      user: "fssmfnipgcsobv",
-      database: "d47lq5l2er5rkb",
-      host: "ec2-54-196-89-124.compute-1.amazonaws.com"
-  };
+ 
   
-  connectionString = {
-      connectionString: process.env.DATABASE_URL,
-      ssl: true
+const connectionString = {
+    user: "fssmfnipgcsobv",
+    database: "d47lq5l2er5rkb",
+    host: "ec2-54-196-89-124.compute-1.amazonaws.com",  
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
       };
 
   const pool = new Pool(connectionString);
@@ -53,6 +51,23 @@ app.post('/save', (request, response) => {
     })
 })
 
+app.get('/getContact', (request, response) => {
+    const client = new pg.Client(connectionString);
+    client.connect();
+    const query = client.query('SELECT sfid FROM salesforce.Contact WHERE Email ='+request.body.emailInput);
+    query.on('end', () => { 
+        client.end(); 
+    });
+    
+    console.log(request.body)
+    console.log('I got a request')
+    console.log('Email: '+request.body.emailInput,'Id: '+json(result))
+    response.json({
+       status: 'success',
+       result : result,
+      
+    })
+})
 
 
 // Access the parse results as request.body
