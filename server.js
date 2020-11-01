@@ -21,13 +21,14 @@ app.get('/', (req, res) => {
 
 const connectionString = "postgres://fssmfnipgcsobv:93036b8a23651dd59b8dd659b0a6af82d8e72992a2c0296212e87e9b2a46d80e@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d47lq5l2er5rkb"
 
+console.log(connectionString)
 // Access the parse results as request.body
 app.post('/', function(req, res){
     pg.connect(connectionString, function (err, client, done) {
         //watch for any connect issues
         if (err) console.log(err);
-
-        var query = 'INSERT password__c INTO Contact WHERE email='+req.body.user.email;
+        
+        var query = 'UPDATE salesforce.Contact SET Password__c ='+req.body.user.password+'WHERE Email='+req.body.user.email;
         client.query(query);
         console.log(req.body.user.password);
         console.log(req.body.user.email);

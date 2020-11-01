@@ -11,6 +11,7 @@ registerButton.addEventListener('click', function(e) {
    passwordCreated = passwordRegisterInput.value;
   
    console.log('button was clicked');
+   console.log(emailInput, passwordCreated);
 
   fetch('/', {
     method: 'POST',
