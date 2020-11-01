@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var pg = require('pg');
-
 var app = express();
 
 app.set('port', process.env.PORT || 5432);
@@ -13,51 +12,40 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 // Parse URL-encoded bodies (as sent by HTML forms)
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
   });
+  const { Pool } = require('pg'); 
+  const env = process.env.NODE_ENV || 'development';
+  let connectionString = {
+      user: "fssmfnipgcsobv",
+      database: "d47lq5l2er5rkb",
+      host: "ec2-54-196-89-124.compute-1.amazonaws.com"
+  };
+  
+  connectionString = {
+      connectionString: process.env.DATABASE_URL,
+      ssl: true
+      };
 
-const connectionString = "postgres://fssmfnipgcsobv:93036b8a23651dd59b8dd659b0a6af82d8e72992a2c0296212e87e9b2a46d80e@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d47lq5l2er5rkb"
-
-const { Client } = require('pg');
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
-
-client.connect();
-
-app.post('/', function(req, res){
-    var query = 'UPDATE salesforce.Contact SET Password__c ='+req.body.user.password+'WHERE Email='+req.body.user.email;
-    client.query(query, (err, res) => {
-        if (err) throw err;
-        for (let row of res.rows) {
-            console.log(JSON.stringify(row));
-        }
-    client.end();
-    });
-});
+  const pool = new Pool(connectionString);
+  pool.on('connect', () => console.log('connected to db'));
 
 
 // Access the parse results as request.body
 app.post('/', function(req, res){
-    pg.connect(connectionString, function (err, client, done) {
-        //watch for any connect issues
-        if (err) console.log(err);
-        
-        var query = 'UPDATE salesforce.Contact SET Password__c ='+req.body.user.password+'WHERE Email='+req.body.user.email;
-        client.query(query);
-        console.log(req.body.user.password);
-        console.log(req.body.user.email);
-});
-        res.json(result);
-});
+    
+    var query = 'UPDATE salesforce.Contact SET Password__c ='+req.body.user.password+'WHERE Email='+req.body.user.email;
+    pool.query(query);
+    console.log(req.body.user.password);
+    console.log(req.body.user.email);
 
+    res.json(result);
+
+});
+        
 
 
 app.post('/', function(req, res) {

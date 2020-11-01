@@ -1,5 +1,6 @@
 console.log('Client-side code running');
 
+const url = 'https://still-stream-63740.herokuapp.com/';
 var emailRegisterInput = document.getElementById('inputEmail');
 var passwordRegisterInput = document.getElementById('inputPasswordRegister');
 const registerButton = document.getElementById('registerButton');
