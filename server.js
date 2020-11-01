@@ -1,7 +1,7 @@
-var express = require('express');
+const express = require('express');
 var bodyParser = require('body-parser');
 var pg = require('pg');
-var app = express();
+const app = express();
 
 app.set('port', process.env.PORT || 5432);
 
@@ -33,18 +33,35 @@ app.get('/', (req, res) => {
   const pool = new Pool(connectionString);
   pool.on('connect', () => console.log('connected to db'));
 
+// Example
+app.post('/save', (request, response) => {
+    pg.connect(connectionString, function (err, client, done) {
+    var query = 'UPDATE salesforce.Contact SET Password__c ='+request.body.passwordCreated+'WHERE Email='+request.body.emailInput;
+    pg.query(query);
+    console.log(request.body)
+    console.log('I got a request')
+    console.log('Email: '+request.body.emailInput,'Password: '+request.body.passwordCreated)
+    response.json({
+       status: 'success',
+       Email : emailInput,
+       Password : passwordCreated 
+        })
+    })
+})
+
 
 // Access the parse results as request.body
 app.post('/', function(req, res){
-    
-    var query = 'UPDATE salesforce.Contact SET Password__c ='+req.body.user.password+'WHERE Email='+req.body.user.email;
-    pool.query(query);
-    console.log(req.body.user.password);
-    console.log(req.body.user.email);
-
-    res.json(result);
+    pg.connect(connectionString, function (err, client, done) {
+        //watch for any connect issues
+        if (err) console.log(err);
+        var query = 'UPDATE salesforce.Contact SET Password__c ='+req.body.user.password+'WHERE Email='+req.body.user.email;
+        pool.query(query);
+   
 
 });
+
+})
         
 
 
