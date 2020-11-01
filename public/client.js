@@ -1,10 +1,28 @@
 console.log('Client-side code running');
 
+var emailRegisterInput = document.getElementById('inputEmail');
+var passwordRegisterInput = document.getElementById('inputPasswordRegister');
 const registerButton = document.getElementById('registerButton');
+
+var emailInput;
+var passwordCreated;
 registerButton.addEventListener('click', function(e) {
+
   console.log('button was clicked');
 
-  fetch('/register', {method: 'POST'})
+  fetch('/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        user: {
+            password: passwordRegisterInput.value,
+            email: emailInput.value
+        }
+    })
+})
+  
     .then(function(response) {
       if(response.ok) {
         console.log('password saved');
