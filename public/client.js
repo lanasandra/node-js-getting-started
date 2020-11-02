@@ -28,9 +28,6 @@ registerButton.addEventListener('click', function(e) {
 });
 
 
-
-
-
 getAccountNumbers.addEventListener('click', function(e) {
   e.preventDefault();
  

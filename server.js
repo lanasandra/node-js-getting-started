@@ -45,10 +45,10 @@ app.post('/api/getAccounts', (req, res) => {
         res.status(500).json({ "message": err});
 
     })
-})
+});
 
-// Creation d'une route GET 
-// https://still-stream-63740.herokuapp.com/api/getAccounts
+// Creation d'une route POST 
+// https://still-stream-63740.herokuapp.com/api/getContactName
 app.post('/api/getContatName', (req, res) => {
   client.query('SELECT * FROM salesforce.Contact WHERE Email ='+emailInput).then(response => {
       console.log('***** response', response);
