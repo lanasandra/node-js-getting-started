@@ -50,9 +50,9 @@ app.post('/api/getAccounts', (req, res) => {
 // Creation d'une route GET 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post('/api/getContatName', (req, res) => {
-  client.query('SELECT FirstName FROM salesforce.Contact WHERE Email = $3').then(response => {
+  client.query('SELECT * FROM salesforce.Contact WHERE Email ='+emailInput).then(response => {
       console.log('***** response', response);
-      res.status(200).json({ "message": "Bienvenue" + response + " sur votre espace personnel"});
+      res.status(200).json({ "message": "Bienvenue" + response.firstName + " sur votre espace personnel"});
   }).catch(err => {
       res.status(500).json({ "message": err});
 
