@@ -1,7 +1,7 @@
-const express = require('express');
+var express = require('express');
 var bodyParser = require('body-parser');
-const pg = require('pg');
-const app = express();
+var pg = require('pg');
+var app = express();
 
 app.set('port', process.env.PORT || 5432);
 
@@ -14,74 +14,54 @@ app.use(express.json());
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded({ extended: true }))
 
+// Creation de ta connexion postgres
+const { Client } = require('pg')
+const client = new Client({
+  host: 'ec2-54-196-89-124.compute-1.amazonaws.com',
+  port: 5432,
+  user: 'fssmfnipgcsobv',
+  password: '93036b8a23651dd59b8dd659b0a6af82d8e72992a2c0296212e87e9b2a46d80e',
+  database: 'd47lq5l2er5rkb'
+})
+
+
+// connexion a postgre
+client.connect(err => {
+    if (err) {
+      console.error('connection error', err.stack)
+    } else {
+      console.log('connected')
+    }
+  })
+
+
+// Creation d'une route POST 
+// https://still-stream-63740.herokuapp.com/api/getAccounts
+app.post('/api/getAccounts', (req, res) => {
+    client.query('SELECT * FROM salesforce.Account').then(response => {
+        console.log('***** response', response);
+        res.status(200).json({ "message": "Il y'a " + response.rows.length + " Accounts"});
+    }).catch(err => {
+        res.status(500).json({ "message": err});
+
+    })
+})
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
-  });
-  const { Pool } = require('pg'); 
-  const env = process.env.NODE_ENV || 'development';
- 
-  
-const connectionString = {
-    user: "fssmfnipgcsobv",
-    database: "d47lq5l2er5rkb",
-    host: "ec2-54-196-89-124.compute-1.amazonaws.com",  
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
-      };
-
-  const pool = new Pool(connectionString);
-  pool.on('connect', () => console.log('connected to db'));
-
-// Example
-app.post('/save', (request, response) => {
-    const client = new pg.Client(connectionString);
-    client.connect();
-    const query = client.query('UPDATE salesforce.Contact SET Password__c ='+request.body.passwordCreated+'WHERE Email='+request.body.emailInput);
-    query.on('end', () => { 
-        client.end(); 
-    });
-    
-    console.log(request.body)
-    console.log('I got a request')
-    console.log('Email: '+request.body.emailInput,'Password: '+request.body.passwordCreated)
-    response.json({
-       status: 'success',
-       Email : emailInput,
-       Password : passwordCreated 
-    })
-})
-
-app.get('/getContact', (request, response) => {
-    const client = new pg.Client(connectionString);
-    client.connect();
-    const query = client.query('SELECT sfid FROM salesforce.Contact WHERE Email ='+request.body.emailInput);
-    query.on('end', () => { 
-        client.end(); 
-    });
-    
-    console.log(request.body)
-    console.log('I got a request')
-    console.log('Email: '+request.body.emailInput,'Id: '+json(result))
-    response.json({
-       status: 'success',
-       result : result,
+});
       
-    })
-})
-
-
 // Access the parse results as request.body
 app.post('/', function(req, res){
-    pg.connect(connectionString, function (err, client, done) {
-        //watch for any connect issues
-        if (err) console.log(err);
-        var query = 'UPDATE salesforce.Contact SET Password__c ='+req.body.user.password+'WHERE Email='+req.body.user.email;
-        pool.query(query);
-   
+    
+    var query = 'UPDATE salesforce.Contact SET Password__c ='+req.body.user.password+'WHERE Email='+req.body.user.email;
+    pool.query(query);
+    console.log(req.body.user.password);
+    console.log(req.body.user.email);
+
+    res.json(result);
 
 });
-
-})
         
 
 

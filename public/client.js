@@ -4,48 +4,47 @@ const url = 'https://still-stream-63740.herokuapp.com/';
 var emailRegisterInput = document.getElementById('inputEmail');
 var passwordRegisterInput = document.getElementById('inputPasswordRegister');
 const registerButton = document.getElementById('registerButton');
+const getAccountNumbers = document.getElementById('getAccountNumbers');
 
 var emailInput;
 var passwordCreated;
-
-registerButton.addEventListener('click', function(e) {
-   emailInput = emailRegisterInput.value;
-   passwordCreated = passwordRegisterInput.value;
+// registerButton.addEventListener('click', function(e) {
+//    emailInput = emailRegisterInput.value;
+//    passwordCreated = passwordRegisterInput.value;
   
-   console.log('button was clicked');
-   console.log(emailInput, passwordCreated);
-   
+//    console.log('button was clicked');
+//    console.log(emailInput, passwordCreated);
 
-   const data = {emailInput, passwordCreated};
-
-   fetch('/getContact', {
-       method: 'GET'
-
-   })
-   .then((resp) => resp.json()) // Transform the data into json
-   .then(function(data) {
-    console.log(data);
-     })
-
-
-   //fetch('/save', {
-    //method: 'POST',
-    //headers: {
-      //  'Content-Type': 'application/json'
-    //},
-    //body: JSON.stringify(data)
+//   fetch('/', {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+        
+//     password: passwordCreated,
+//     email: emailInput
     
-    //})
-    
-    ///.then(response => {
+//     })
+// })
 
-       // console.log(response);
+// });
 
+getAccountNumbers.addEventListener('click', function(e) {
+  e.preventDefault();
+ 
+  console.log('button was clicked');
 
-})
-
-   
-//})
+  //On appelle notre route créée sur le serveur
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/getAccounts', true);
+  xhr.onload = function () {
+      // do something to response
+      response = JSON.parse(xhr.response);
+      alert(response.message);
+    };
+  xhr.send();
+});
 
 //setInterval(function() {
   //fetch('/clicks', {method: 'GET'})
