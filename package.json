@@ -23,6 +23,5 @@
   },
   "homepage": "https://github.com/heroku/node-js-getting-started#readme",
   "author": "",
-  "license": "ISC",
-  "devDependencies": {}
+  "license": "ISC"
 }
