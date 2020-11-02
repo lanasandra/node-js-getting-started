@@ -25,7 +25,7 @@ const client = new Client({
 })
 
 
-// connexion a postgre
+// connexion à postgres
 client.connect(err => {
     if (err) {
       console.error('connection error', err.stack)
@@ -45,6 +45,18 @@ app.post('/api/getAccounts', (req, res) => {
         res.status(500).json({ "message": err});
 
     })
+})
+
+// Creation d'une route GET 
+// https://still-stream-63740.herokuapp.com/api/getAccounts
+app.post('/api/getContatName', (req, res) => {
+  client.query('SELECT FirstName FROM salesforce.Contact WHERE Email = $3').then(response => {
+      console.log('***** response', response);
+      res.status(200).json({ "message": "Bienvenue" + response.firstName + " sur votre espace personnel"});
+  }).catch(err => {
+      res.status(500).json({ "message": err});
+
+  })
 })
 
 app.get('/', (req, res) => {
