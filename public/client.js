@@ -15,9 +15,10 @@ registerButton.addEventListener('click', function(e) {
   emailInput = emailRegisterInput.value;
   passwordCreated = passwordRegisterInput.value;
   
+  console.log(emailInput, passwordCreated)
    //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '/api/getContatName', true);
+  xhr.open('POST', '/api/getContatName', true);
   xhr.onload = function () {
       // do something to response
       response = JSON.parse(xhr.response);
