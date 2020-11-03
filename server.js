@@ -49,7 +49,7 @@ app.post('/api/getAccounts', (req, res) => {
 
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
-app.post('registerPage/api/getAccounts', (req, res) => {
+app.post('/api/getAccounts2', (req, res) => {
   client.query('SELECT * FROM salesforce.Account').then(response => {
       console.log('***** response', response);
       res.status(200).json({ "message": "Il y'a " + response.rows.length + " Accounts"});
