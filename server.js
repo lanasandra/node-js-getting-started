@@ -48,6 +48,18 @@ app.post('/api/getAccounts', (req, res) => {
 });
 
 // Creation d'une route POST 
+// https://still-stream-63740.herokuapp.com/api/getAccounts
+app.post('/api/getAccounts', (req, res) => {
+  client.query('SELECT * FROM salesforce.Account').then(response => {
+      console.log('***** response', response);
+      res.status(200).json({ "message": "Il y'a " + response.rows.length + " Accounts"});
+  }).catch(err => {
+      res.status(500).json({ "message": err});
+
+  })
+});
+
+// Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getContactName
 app.post('registerPage/api/getContatName', (req, res) => {
   client.query('UPDATE salesforce.contact set password__c ='+req.params.password+'FROM salesforce.contact AS c where c.email ='+req.params.email)
