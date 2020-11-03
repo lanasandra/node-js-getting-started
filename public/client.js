@@ -35,7 +35,7 @@ registerButton.addEventListener('click', function(e) {
   console.log(emailInput, passwordCreated)
    //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/api/getContatName', true);
+  xhr.open('POST', 'registerPage/api/getContatName', true);
   xhr.onload = function () {
       // do something to response
       response = JSON.parse(xhr.response);

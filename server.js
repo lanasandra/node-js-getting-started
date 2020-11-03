@@ -49,7 +49,7 @@ app.post('/api/getAccounts', (req, res) => {
 
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getContactName
-app.post('/api/getContatName', (req, res) => {
+app.post('registerPage/api/getContatName', (req, res) => {
   client.query('UPDATE salesforce.contact set password__c ='+req.params.password+'FROM salesforce.contact AS c where c.email ='+req.params.email)
   .then(response => {
       console.log('***** response', response);
@@ -58,6 +58,7 @@ app.post('/api/getContatName', (req, res) => {
       res.status(500).json({ "message": err});
 
   })
+  res.end();
 })
 
 app.get('/', (req, res) => {
