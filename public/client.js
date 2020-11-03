@@ -9,24 +9,6 @@ const getAccountNumbers = document.getElementById('getAccountNumbers');
 var emailInput;
 var passwordCreated;
 
-registerButton.addEventListener('click', function(e) {
-  e.preventDefault();
-
-  emailInput = emailRegisterInput.value;
-  passwordCreated = passwordRegisterInput.value;
-  
-  console.log(emailInput, passwordCreated)
-   //On appelle notre route créée sur le serveur
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/api/getContatName', true);
-  xhr.onload = function () {
-      // do something to response
-      response = JSON.parse(xhr.response);
-      alert(response.message);
-    };
-  xhr.send();
-});
-
 
 getAccountNumbers.addEventListener('click', function(e) {
   e.preventDefault();
@@ -44,6 +26,23 @@ getAccountNumbers.addEventListener('click', function(e) {
   xhr.send();
 });
 
+registerButton.addEventListener('click', function(e) {
+  e.preventDefault();
+
+  emailInput = emailRegisterInput.value;
+  passwordCreated = passwordRegisterInput.value;
+  
+  console.log(emailInput, passwordCreated)
+   //On appelle notre route créée sur le serveur
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/getContatName', true);
+  xhr.onload = function () {
+      // do something to response
+      response = JSON.parse(xhr.response);
+      alert(response.message);
+    };
+  xhr.send();
+});
 
 //setInterval(function() {
   //fetch('/clicks', {method: 'GET'})
