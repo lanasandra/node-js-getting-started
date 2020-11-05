@@ -7,6 +7,7 @@ app.set('port', process.env.PORT || 5432);
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }))
 // Creation de ta connexion postgres
 const { Client } = require('pg');
 const { parse } = require('path');
+const { REFUSED } = require('dns');
 const client = new Client({
   host: 'ec2-54-196-89-124.compute-1.amazonaws.com',
   port: 5432,
@@ -47,6 +49,14 @@ app.post('/api/getAccounts', (req, res) => {
 
     })
 });
+
+// Creation d'une route POST 
+// https://still-stream-63740.herokuapp.com/api/getAccounts
+app.post('/api/getAccounts3', (req, res) => {
+  client.query('SELECT * FROM salesforce.Account')
+  res.send(req.body)
+
+})
 
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
