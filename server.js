@@ -50,6 +50,18 @@ app.post('/api/getContacts', (req, res) => {
     })
 });
 
+app.post('api/getProducts', (req,res)=> {
+  client.query ='SELECT * FROM salesforce.pricebookentry'
+  .then(response => {
+    console.log('***** response', response);
+    res.status(200).json({ "message": "Il y'a " + response.rows.length + " produits"});
+  }).catch(err => {
+    res.status(500).json({ "message": err});
+  
+  })
+  });
+  
+
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post("/clicked", (req, res) => {
@@ -83,16 +95,7 @@ app.post('/api/getAccounts2', (req, res) => {
   })
 });
 
-app.post('api/getProduct', (req,res)=> {
-client.query ='SELECT * FROM salesforce.pricebookentry'
-.then(response => {
-  console.log('***** response', response);
-  res.status(200).json({ "message": "Il y'a " + response.rows.length + " produits"});
-}).catch(err => {
-  res.status(500).json({ "message": err});
 
-})
-});
 
 
 
