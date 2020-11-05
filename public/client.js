@@ -82,7 +82,7 @@ getAccountNumbers2.addEventListener('click', function(e) {
 
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/api/getAccounts2', true);
+  xhr.open('POST', 'api/getProduct', true);
   xhr.onload = function () {
       // do something to response
       response = JSON.parse(xhr.response);
