@@ -84,7 +84,7 @@ app.post('/api/getAccounts2', (req, res) => {
 });
 
 app.post('api/getProduct', (req,res)=> {
-client.query ='SELECT * FROM salesforce.pricebookentry ORDER BY name'
+client.query ='SELECT * FROM salesforce.pricebookentry'
 .then(response => {
   console.log('***** response', response);
   res.status(200).json({ "message": "Il y'a " + response.rows.length + " produits"});
