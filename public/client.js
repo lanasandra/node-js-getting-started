@@ -50,7 +50,7 @@ loginButton.addEventListener('click', function(e) {
 
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/api/getAccounts3', true);
+  xhr.open('GET', '/api/getAccounts3/jane_gray@uoa.edu', true);
   xhr.onload = function () {
       // do something to response
       response = JSON.parse(xhr.response);

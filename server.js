@@ -52,9 +52,9 @@ app.post('/api/getAccounts', (req, res) => {
 
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
-app.post('/api/getAccounts3', (req, res) => {
-  client.query('SELECT * FROM salesforce.Account')
-  res.send(req.body)
+app.get('/api/getAccounts3/:email', (req, res) => {
+  client.query('SELECT * FROM salesforce.Contact WHERE email'=+req.params.email)
+    res.send(req.body)
 
 })
 
