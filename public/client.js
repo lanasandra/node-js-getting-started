@@ -1,3 +1,4 @@
+const { response } = require("express");
 
 
 console.log('Client-side code running');
@@ -59,7 +60,7 @@ loginButton.addEventListener('click', function(e) {
   xhr.onload = function () {
     // do something to response
     response = JSON.parse(xhr.response);
-    console.log(response.firstname);
+    console.log(response.values[0]);
   };
   xhr.send()
 });  
