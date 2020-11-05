@@ -71,10 +71,11 @@ app.post("/clicked", (req, res) => {
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post('/api/getAccounts2', (req, res) => {
-  client.query('SELECT * FROM salesforce.Contact WHERE email=jane_gray@uoa.edu')
+  var email = 'jane_gray@uoa.edu';
+  client.query('SELECT * FROM salesforce.Contact WHERE email='+email)
   .then(response => {
       console.log('***** response', response);
-      res.status(200).json({ "message": "Il y'a " + Object.values + " Contacts"});
+      res.status(200).json({ "message": "Il y'a " + response.rows.length + " Contacts"});
   }).catch(err => {
       res.status(500).json({ "message": err});
 
