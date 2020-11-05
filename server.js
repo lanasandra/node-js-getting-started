@@ -53,7 +53,7 @@ app.post('/api/getAccounts', (req, res) => {
 app.post('/api/getAccounts2', (req, res) => {
   client.query('SELECT * FROM salesforce.Contact WHERE Email=jane_gray@uoa.edu').then(response => {
       console.log('***** response', response);
-      res.status(200).json({ "message": "Il y'a " + response.rows + " Contacts"});
+      res.status(200).json({ "message": "Il y'a " + response[0].body + " Contacts"});
   }).catch(err => {
       res.status(500).json({ "message": err});
 
