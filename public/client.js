@@ -52,22 +52,14 @@ loginButton.addEventListener('click', function(e) {
     email : "jane_gray@uoa.edu"
   }
 
-  fetch("/clicked", {
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/json'
-    }, 
-    body: JSON.stringify(data)
-})
- .then(response => response.json())
- .then(function(response) {
-    if (response.ok) {
-        console.log('got data: ', response.data);
-    }
-    throw new Error('Request failed.');
-  })
-.catch(function(error) {
-    console.log(error);
-  });
-
-});
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", '/clicked', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function () {
+    // do something to response
+    response = JSON.parse(xhr.response);
+    alert(response.message);
+  };
+  xhr.send(JSON.stringify(data))
+});  
+  
