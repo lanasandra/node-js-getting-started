@@ -50,10 +50,10 @@ app.post('/api/getContacts', (req, res) => {
     })
 });
 
-app.post('api/getContracts', (req,res)=> {
-  client.query =('SELECT * FROM salesforce.Contract').then(response => {
+app.get('api/getContracts', (req,res)=> {
+  client.query('SELECT * FROM salesforce.Contract').then(response => {
     console.log('***** response', response);
-    res.status(200).json({ "message": "Il y'a " + response.rows.length + " contracts"});
+    res.status(200).json({ "message": "Il y'a " + response.rows.length + " contracts et il y a "+response+" ?"});
   }).catch(err => {
     res.status(500).json({ "message": err});
   

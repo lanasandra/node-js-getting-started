@@ -76,20 +76,25 @@ getContactNumbers.addEventListener('click', function(e) {
 });
 
 getContractNumbers.addEventListener('click', function(e) {
-  e.preventDefault();
- 
-  console.log('button was clicked');
 
-  //On appelle notre route créée sur le serveur
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'api/getContracts', true); 
-  xhr.onload = function () {
+var request = new XMLHttpRequest()
 
-      response = JSON.parse(xhr.response);
-      console.log(xhr.response);
-      console.log(response.message);
-    };
-    xhr.send();
+request.open('GET', 'api/getContracts', true)
+request.onload = function () {
+  // Begin accessing JSON data here
+  var data = JSON.parse(this.response)
+  console.log(data)
+
+  if (request.status >= 200 && request.status < 400) {
+    data.forEach((contract) => {
+      console.log(contract.contractterm)
+    })
+  } else {
+    console.log('error')
+  }
+}
+
+request.send()
 });
 
 
