@@ -69,7 +69,7 @@ getAccountNumbers.addEventListener('click', function(e) {
   xhr.open('POST', '/api/getContacts', true);
   xhr.onload = function () {
       // do something to response
-      let response = JSON.parse(xhr.response);
+      response = JSON.parse(xhr.response);
       alert(response.message);
     };
   xhr.send();
@@ -90,7 +90,7 @@ getAccountNumbers2.addEventListener('click', function(e) {
 
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) 
 
-      let response = xhr.response;
+      response = xhr.response;
       
       alert(response.message);
     };
