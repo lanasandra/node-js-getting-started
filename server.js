@@ -50,21 +50,21 @@ app.post('/api/getContacts', (req, res) => {
     })
 });
 
-app.post('api/getProducts', (req,res)=> {
-  client.query ='SELECT * FROM salesforce.pricebookentry'
+app.post('api/getContracts', (req,res)=> {
+  client.query ='SELECT * FROM salesforce.Contract'
   .then(response => {
     console.log('***** response', response);
-    res.status(200).json({ "message": "Il y'a " + response.rows.length + " produits"});
+    res.status(200).json({ "message": "Il y'a " + response.rows.length + " contracts"});
   }).catch(err => {
     res.status(500).json({ "message": err});
   
   })
   });
-  
+
 
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
-app.post("/clicked", (req, res) => {
+/*app.post("/clicked", (req, res) => {
  
   client.query('SELECT firstname, lastname FROM salesforce.contact where id=1')
   .then(response => {
@@ -161,7 +161,7 @@ app.post('/', function(req, res) {
            }
         );
     });
-});
+});*/
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

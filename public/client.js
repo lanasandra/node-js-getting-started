@@ -82,7 +82,7 @@ getAccountNumbers2.addEventListener('click', function(e) {
 
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'api/getProducts', true);
+  xhr.open('POST', 'api/getContracts', true);
   xhr.onload = function () {
       // do something to response
       response = JSON.parse(xhr.response);
@@ -91,22 +91,5 @@ getAccountNumbers2.addEventListener('click', function(e) {
   xhr.send();
 });
 
-loginButton.addEventListener('click', function(e) {
-  e.preventDefault();
- 
-  console.log('button was clicked');
 
-  var data = {
-    email : "jane_gray@uoa.edu"
-  }
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", '/clicked', true);
-  xhr.onload = function () {
-    // do something to response
-    response = JSON.parse(xhr.response);
-    console.log(response.message);
-  }
-  xhr.send()
-});  
   
