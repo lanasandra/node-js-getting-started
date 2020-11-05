@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 console.log('Client-side code running');
 
 const url = 'https://still-stream-63740.herokuapp.com/';
@@ -58,7 +60,7 @@ loginButton.addEventListener('click', function(e) {
   xhr.onload = function () {
     // do something to response
     response = JSON.parse(xhr.response);
-    alert(response.message);
+    alert(response);
   };
   xhr.send()
 });  
