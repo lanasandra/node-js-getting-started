@@ -21,8 +21,8 @@ const updateButton = document.getElementById("updateButton");
 
 
 // For test
-const getAccountNumbers = document.getElementById('getAccountNumbers');
-const getAccountNumbers2 = document.getElementById('getAccountNumbers2');
+const getContactNumbers = document.getElementById("getContactNumbers");
+const  getContractNumbers = document.getElementById("getContractNumbers");
 
 
 // Display resister page Fields
@@ -59,7 +59,7 @@ function displayLoginPage() {
 
 // Http Requests
 
-getAccountNumbers.addEventListener('click', function(e) {
+getContactNumbers.addEventListener('click', function(e) {
   e.preventDefault();
  
   console.log('button was clicked');
@@ -75,7 +75,7 @@ getAccountNumbers.addEventListener('click', function(e) {
   xhr.send();
 });
 
-getAccountNumbers2.addEventListener('click', function(e) {
+getContractNumbers.addEventListener('click', function(e) {
   e.preventDefault();
  
   console.log('button was clicked');
