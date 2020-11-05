@@ -51,7 +51,7 @@ app.post('/api/getContacts', (req, res) => {
 });
 
 app.post('api/getContracts', (req,res)=> {
-  client.query ='SELECT * FROM salesforce.Contract'
+  client.query =('SELECT * FROM salesforce.Contract')
   .then(response => {
     console.log('***** response', response);
     res.status(200).json({ "message": "Il y'a " + response.rows.length + " contracts"});
