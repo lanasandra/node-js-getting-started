@@ -40,7 +40,10 @@ getAccountNumbers2.addEventListener('click', function(e) {
   xhr.onload = function () {
       // do something to response
       response = JSON.parse(xhr.response);
-      alert(response.message);
+      for(let i = 0; i < 10; i++) {
+        if(response.values[i]) console.log(response.values[i]); 
+    }
+      
     };
   xhr.send();
 });
