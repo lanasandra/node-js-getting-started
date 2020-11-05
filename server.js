@@ -54,7 +54,7 @@ app.post('/api/getAccounts', (req, res) => {
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post("/clicked", (req, res) => {
   var email = (req.body.email);
-  client.query('SELECT * FROM salesforce.Contact WHERE salesforce.Contact.email='+email)
+  client.query('SELECT * FROM salesforce.Contact')
   .then(function(err, foundContact) {
       if (err) {
           console.log(err);
