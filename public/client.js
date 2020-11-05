@@ -90,7 +90,7 @@ getAccountNumbers2.addEventListener('click', function(e) {
 
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) 
 
-      response = xhr.response;
+      response = JSON.parse(xhr.response);
       
       alert(response.message);
     };
