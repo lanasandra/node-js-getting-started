@@ -57,7 +57,10 @@ app.post("/clicked", (req, res) => {
   client.query('SELECT firstname, lastname FROM salesforce.contact where id=1')
   .then(response => {
     console.log('***** response', response.values);
-    res.status(200).json({ "message": "Il y'a " + response.values + " Accounts"});
+    res.status(200).json(
+      { "firstname": "Il y'a " + response.firstname + " Accounts",
+        "lastname": "Il y'a " + response.lastname + " Accounts"
+    });
   })
   .catch(err => {
     res.status(500).json({ "message": err});
