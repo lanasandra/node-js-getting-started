@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 // Creation de ta connexion postgres
-const { Client } = require('pg')
+const { Client } = require('pg');
+const { parse } = require('path');
 const client = new Client({
   host: 'ec2-54-196-89-124.compute-1.amazonaws.com',
   port: 5432,
@@ -52,7 +53,7 @@ app.post('/api/getAccounts', (req, res) => {
 app.post('/api/getAccounts2', (req, res) => {
   client.query('SELECT FirstName FROM salesforce.Contact WHERE Email=jane_gray@uoa.edu').then(response => {
       console.log('***** response', response);
-      res.status(200).json({ "message": "Il y'a " + JSON.stringify(response) + " Contacts"});
+      res.status(200).json({ "message": "Il y'a " + parse(response) + " Contacts"});
   }).catch(err => {
       res.status(500).json({ "message": err});
 
