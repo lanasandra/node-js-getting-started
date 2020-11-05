@@ -60,7 +60,7 @@ loginButton.addEventListener('click', function(e) {
   xhr.onload = function () {
     // do something to response
     response = JSON.parse(xhr.response);
-    alert(response);
+    console.log(response.values);
   };
   xhr.send()
 });  

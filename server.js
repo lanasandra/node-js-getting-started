@@ -54,12 +54,13 @@ app.post('/api/getAccounts', (req, res) => {
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post("/clicked", (req, res) => {
  
-  client.query('SELECT * FROM salesforce.Contact')
+  client.query('SELECT firstName, LastName FROM salesforce.Contact')
   
   .then(response => {
     console.log('***** response', response);
-    res.status(200).json(response);
-  }).catch(err => {
+    res.status(200).json(response)
+  })
+  .catch(err => {
     res.status(500).json({ "message": err});
 
   })
