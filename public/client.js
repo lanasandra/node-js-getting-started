@@ -84,7 +84,7 @@ getAccountNumbers2.addEventListener('click', function(e) {
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'api/getContracts', true);
   xhr.responseType = 'json'; // We are waiting for Json format
-  xhr.send();
+  
   
   xhr.onload = function () {
 
@@ -94,7 +94,8 @@ getAccountNumbers2.addEventListener('click', function(e) {
       
       alert(response.message);
     };
-  
+    
+    xhr.send();
 });
 
 
