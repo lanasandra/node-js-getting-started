@@ -71,8 +71,9 @@ app.post("/clicked", (req, res) => {
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post('/api/getAccounts2', (req, res) => {
-  var email = 'jane_gray@uoa.edu';
-  client.query('SELECT * FROM salesforce.Contact WHERE email='+email.toString)
+  var email = 'jane_gray@uoa.edu'
+  var doubleQuotes = "'";
+  var query = 'SELECT * FROM salesforce.Contact where email='+doubleQuotes+email+doubleQuotes
   .then(response => {
       console.log('***** response', response);
       res.status(200).json({ "message": "Il y'a " + response.rows.length + " Contacts"});
@@ -145,6 +146,10 @@ app.post('/', function(req, res) {
         );
     });
 });
+var email = 'jane_gray@uoa.edu'
+var doubleQuotes = "'";
+var query = 'SELECT * FROM salesforce.Contact where email='+doubleQuotes+email+doubleQuotes
+console.log(query)
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
