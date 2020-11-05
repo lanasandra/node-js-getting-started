@@ -1,4 +1,4 @@
-const { response } = require("express");
+
 
 console.log('Client-side code running');
 
@@ -56,7 +56,6 @@ loginButton.addEventListener('click', function(e) {
 
   var xhr = new XMLHttpRequest();
   xhr.open("POST", '/clicked', true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function () {
     // do something to response
     response = JSON.parse(xhr.response);
