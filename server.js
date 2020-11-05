@@ -63,7 +63,7 @@ app.post("/clicked", (req, res) => {
               error: err
           });
       } else {
-          console.log(foundLList); //THE ELEMENT IS FOUND
+          console.log(foundContact); //THE ELEMENT IS FOUND
           return res.status(200).json({
               ok: true,
               data: foundContact
