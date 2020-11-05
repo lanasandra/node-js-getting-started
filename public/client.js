@@ -6,6 +6,7 @@ var passwordRegisterInput = document.getElementById('inputPasswordRegister');
 const registerButton = document.getElementById('registerButton');
 const getAccountNumbers = document.getElementById('getAccountNumbers');
 const getAccountNumbers2 = document.getElementById('getAccountNumbers2');
+const loginButton = document.getElementById("validateButton");
 var emailInput;
 var passwordCreated;
 
@@ -42,7 +43,7 @@ getAccountNumbers2.addEventListener('click', function(e) {
   xhr.send();
 });
 
-registerButton.addEventListener('click', function(e) {
+loginButton.addEventListener('click', function(e) {
   e.preventDefault();
  
   console.log('button was clicked');
