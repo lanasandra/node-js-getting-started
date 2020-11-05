@@ -82,19 +82,12 @@ getAccountNumbers2.addEventListener('click', function(e) {
 
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'api/getContracts', true);
-  xhr.responseType = 'json'; // We are waiting for Json format
-  
-  
+  xhr.open('POST', 'api/getContracts', true); 
   xhr.onload = function () {
 
-    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) 
-
       response = JSON.parse(xhr.response);
-      
-      alert(response.message);
+      console.log(response.message);
     };
-    
     xhr.send();
 });
 
