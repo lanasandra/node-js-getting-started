@@ -1,4 +1,3 @@
-const { response } = require("express");
 
 
 console.log('Client-side code running');
