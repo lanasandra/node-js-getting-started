@@ -60,6 +60,6 @@ loginButton.addEventListener('click', function(e) {
     response = JSON.parse(xhr.response);
     alert(response.message);
   };
-  xhr.send(JSON.stringify(data))
+  xhr.send()
 });  
   

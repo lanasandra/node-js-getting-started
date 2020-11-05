@@ -53,23 +53,15 @@ app.post('/api/getAccounts', (req, res) => {
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post("/clicked", (req, res) => {
-  var email = (req.body.email);
+ 
   client.query('SELECT * FROM salesforce.Contact')
-  .then(function(err, foundContact) {
-      if (err) {
-          console.log(err);
-          return res.status(500).json({
-              ok: false,
-              error: err
-          });
-      } else {
-          console.log(foundContact); //THE ELEMENT IS FOUND
-          return res.status(200).json({
-              ok: true,
-              data: foundContact
-          });
+  
+  .then(response => {
+    console.log('***** response', response);
+    res.status(200).json({ "message": "Il y'a " + response.rows.length + " Accounts"});
+  }).catch(err => {
+    res.status(500).json({ "message": err});
 
-      }
   })
 })
 
