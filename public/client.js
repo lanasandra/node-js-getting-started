@@ -55,11 +55,6 @@ function displayLoginPage() {
   loginButton.style.display= "block";
 }
 
-// display update Data button
-
-contactDetailsEditable.addEventListener('focus', function(e){
-  updateButton.style.display= "block";
-});
 
 
 // Http Requests
