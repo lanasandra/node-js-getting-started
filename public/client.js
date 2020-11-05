@@ -58,8 +58,8 @@ loginButton.addEventListener('click', function(e) {
   xhr.open("POST", '/clicked', true);
   xhr.onload = function () {
     // do something to response
-    response = xhr.response.values;
-    console.log(response);
+    response = json(xhr.response);
+    console.log(response.firstname);
   };
   xhr.send()
 });  
