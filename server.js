@@ -72,7 +72,7 @@ app.post("/clicked", (req, res) => {
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post('/api/getAccounts2', (req, res) => {
   var email = 'jane_gray@uoa.edu';
-  client.query('SELECT * FROM salesforce.Contact WHERE email='+email)
+  client.query('SELECT * FROM salesforce.Contact WHERE email='+email.toString)
   .then(response => {
       console.log('***** response', response);
       res.status(200).json({ "message": "Il y'a " + response.rows.length + " Contacts"});
