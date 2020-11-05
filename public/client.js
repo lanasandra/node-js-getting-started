@@ -58,7 +58,7 @@ loginButton.addEventListener('click', function(e) {
   xhr.open("POST", '/clicked', true);
   xhr.onload = function () {
     // do something to response
-    response = json(xhr.response);
+    response = JSON.parse(xhr.response);
     console.log(response.firstname);
   };
   xhr.send()
