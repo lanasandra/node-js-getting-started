@@ -44,6 +44,22 @@ getAccountNumbers2.addEventListener('click', function(e) {
 
 registerButton.addEventListener('click', function(e) {
   e.preventDefault();
+ 
+  console.log('button was clicked');
+
+  //On appelle notre route créée sur le serveur
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/getAccounts2', true);
+  xhr.onload = function () {
+      // do something to response
+      response = JSON.parse(xhr.response);
+      alert(response.message);
+    };
+  xhr.send();
+});
+
+/*registerButton.addEventListener('click', function(e) {
+  e.preventDefault();
 
   emailInput = emailRegisterInput.value;
   passwordCreated = passwordRegisterInput.value;
@@ -72,4 +88,4 @@ registerButton.addEventListener('click', function(e) {
     //.catch(function(error) {
     //  console.log(error);
     //});
-//}, 1000);
+//}, 1000); */
