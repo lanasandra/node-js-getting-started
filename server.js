@@ -60,8 +60,9 @@ app.post('api/login', (req,res)=> {
 
   const query = {
   text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c==$2',
-  values: [req.params.username, req.params.password],
+  values: [req.params.username, req.params.password]
   }
+  console.log(req.params.username, req.params.password)
   client.query(query, (err, res)=> {
     console.log('***** response', response);
     if(err) {
