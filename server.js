@@ -70,8 +70,8 @@ app.post('/api/getContracts', (req,res)=> {
     } else {
       res.status(200)
       res.format ({
-        'application/json': function() {
-        res.send({ message: 'Bienvenue '+res.rows[0]+' dans votre espace personnel' });
+        'text/plain': function() {
+        res.send('Bienvenue '+res.rows[0]+' dans votre espace personnel');
         }   
       })
     }

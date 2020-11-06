@@ -85,8 +85,8 @@ getContractNumbers.addEventListener('click', function(e) {
   xhr.open('POST', '/api/getContracts', true);
   xhr.onload = function () {
       // do something to response
-      response = Parse.JSON(xhr.response);
-      console.log(response.message);
+      response = xhr.response;
+      console.log(response);
     };
   xhr.send();
 });
