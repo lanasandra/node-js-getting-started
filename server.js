@@ -54,18 +54,21 @@ app.post('/api/getContacts', (req, res) => {
 
 app.post('/api/getContracts', (req,res)=> {
   const query = {
-    text:'SELECT firstname FROM salesforce.Contact where lastname=LOWER($1)',
+    text:'SELECT firstname FROM salesforce.Contact where lastname=$1',
     values: ['Grey'],
     rowMode: 'array',
   }
-client.query(query).then(response => {
-    console.log('***** response', response);
-    res.status(200).json({ "message": "Bienvenue " + response.rows[0] + " dans votre espace personnel"});
-  }).catch(err => {
-    res.status(500).json({ "message": err});
-  
+  client.query(query, (err, res) => {
+    if (err) {
+      res.send(err.stack)
+    } else {
+      res.send(res.fields.map(field => field.name)) // ['first_name', 'last_name']
+      res.send(res.rows[0]) // ['Brian', 'Carlson']
+    }
+    res.end()
   })
-  });
+})
+
 
 
 /*app.post('/api/getContracts', (req,res)=> {
