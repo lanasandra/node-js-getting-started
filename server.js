@@ -54,13 +54,13 @@ app.post('/api/getContacts', (req, res) => {
 
 app.post('/api/getContracts', (req,res)=> {
   const query = {
-    text:'SELECT * FROM salesforce.contact WHERE sfid LIKE "00309000003IhHuAAK"'
+    text:'SELECT * FROM salesforce.contact'
   }
   client.query(query, (err, res) => {
     if (err) {
       res.status(400).json(err.stack)
     } else {
-      res.status(200).json(res.rows[0]) // ['Brian', 'Carlson']
+      res.status(200).json(res.rows.length) // ['Brian', 'Carlson']
     }
   })
 
