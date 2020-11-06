@@ -60,13 +60,13 @@ app.post('/api/getContracts', (req,res)=> {
   }
   client.query(query, (err, res) => {
     if (err) {
-      res.send(err.stack)
+      res.send.json(err.stack)
     } else {
-      res.send(res.fields.map(field => field.name)) // ['first_name', 'last_name']
-      res.send(res.rows[0]) // ['Brian', 'Carlson']
+      res.send.json(res.rows[0]) // ['Brian', 'Carlson']
     }
-    res.end()
+    
   })
+  res.end()
 })
 
 
