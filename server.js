@@ -68,12 +68,10 @@ app.post('/api/getContracts', (req,res)=> {
     if (err) {
       res.status(500).json({ "message": err});
     } else {
-      res.send('Bienvenue '+res.rows[0]+' dans votre espace personnel');
-        }   
+        res.status(200).json({ "message": 'Bienvenue '+res.rows[0]+' dans votre espace personnel'});
+      }
   })
 })
-
-  
 
 
   const query = {
