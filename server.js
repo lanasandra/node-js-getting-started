@@ -54,8 +54,7 @@ app.post('/api/getContacts', (req, res) => {
 
 app.post('/api/getContracts', (req,res)=> {
   const query = {
-    text:'SELECT firstname FROM salesforce.Contact where lastname=$1',
-    values: ['Grey']
+    text:'SELECT * FROM salesforce.contact WHERE sfid LIKE "00309000003IhHuAAK"'
   }
   client.query(query, (err, res) => {
     if (err) {
@@ -66,6 +65,8 @@ app.post('/api/getContracts', (req,res)=> {
   })
 
 })
+
+
 
 
 
