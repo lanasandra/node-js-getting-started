@@ -26,7 +26,9 @@ const client = new Client({
   user: 'fssmfnipgcsobv',
   password: '93036b8a23651dd59b8dd659b0a6af82d8e72992a2c0296212e87e9b2a46d80e',
   database: 'd47lq5l2er5rkb',
-  idle_in_transaction_session_timeout: 10000
+  ssl: {
+    rejectUnauthorized: false
+  }
 })
 
 
@@ -52,28 +54,12 @@ app.post('/api/getContacts', (req, res) => {
     })
 });
 
+
+
 app.post('/api/getContracts', (req,res)=> {
-  const query = {
-    text:'SELECT * FROM salesforce.contact'
-  }
-  client.query(query, (err, res) => {
-    if (err) {
-      res.status(400).json(err.stack)
-    } else {
-      res.status(200).json(res.rows.length) // ['Brian', 'Carlson']
-    }
-  })
-
-})
-
-
-
-
-
-/*app.post('/api/getContracts', (req,res)=> {
   client.query('SELECT * FROM salesforce.contract').then(response => {
     console.log('***** response', response);
-    res.status(200).json({ "message": "Il y'a " + response.rows.length + " contracts et il y a "+response+" ?"});
+    res.status(200).json({ "message": "Il y'a " + response.rows.length + " contracts et il y a "+response.rows[0]+" ?"});
   }).catch(err => {
     res.status(500).json({ "message": err});
   
