@@ -31,6 +31,7 @@ const client = new Client({
   }
 })
 
+var salesforcId;
 
 // connexion à postgres
 client.connect(err => {
@@ -47,7 +48,7 @@ client.connect(err => {
 app.post('/api/getContacts', (req, res) => {
     client.query('SELECT * FROM salesforce.Contact').then(response => {
         console.log('***** response', response);
-        res.status(200).json({ "message": "Il y a " + response.rows.length + " contacts"});
+        res.status(200).json(response.rows);
     }).catch(err => {
         res.status(500).json({ "message": err});
 
@@ -57,7 +58,6 @@ app.post('/api/getContacts', (req, res) => {
 
 
 app.post('/api/getContracts', (req,res)=> {
-  
   const query = {
     text: 'SELECT firstname FROM salesforce.Contact WHERE lastname = $1',
     values: ['Grey'],
@@ -73,7 +73,7 @@ app.post('/api/getContracts', (req,res)=> {
   })
 })
 
-
+// Query to display Welcome Message for the contact
   const query = {
     text: 'SELECT firstname FROM salesforce.Contact WHERE lastname = $1',
     values: ['Grey'],
@@ -87,6 +87,93 @@ app.post('/api/getContracts', (req,res)=> {
       console.log('Bienvenue '+res.rows[0]+' dans votre espace personnel')
     }
   })
+
+// Query to set the password of the contact when registering
+/*const query2 = {
+  text: 'UPDATE salesforce.Contact SET password__c = $1 WHERE email = $2 RETURNING sfid',
+  values: ['lana2006','jane_gray@uoa.edu'],
+  rowMode: 'array'
+}
+
+client.query(query2, (err, res) => {
+  if (err) {
+    console.log(err.stack)
+  } else {
+    console.log('Votre compte a été bien enregistré')
+    salesforceId= res.rows[0]
+    console.log(salesforceId)
+  }
+  
+})*/
+
+
+// Query to retrieve the contact details of the contact when logging
+/*const query3 = {
+  text: 'SELECT firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where sfid=$1',
+  values: ['00309000003IhHuAAK'],
+  rowMode: 'array'
+}
+client.query(query3, (err, res)=> {
+  if(err) console.log(err.stack)
+  console.log(res.rows[0])
+})*/
+
+// Query to retreive the contract details of the contact based on sfid
+const query4 = {
+  text: 'SELECT contractnumber, startdate, enddate, contractterm from salesforce.Contract where customersignedid=$1',
+  values: ['00309000001jdcsAAA']
+}
+client.query(query4, (err, res) => {
+  if(err) {
+    console.log(err.stack)
+  } else {
+    console.log(res.rows[0])
+  }
+})
+
+// Query to retreive the products details where pricebook is Legarant pricebook
+const query5 = {
+  text: 'SELECT productcode, name, unitprice from Salesforce.PriceBookEntry where pricebook2id=$1 order by name',
+  values: ['01s09000001emDjAAI']
+
+}
+client.query(query5, (err, res) => {
+  if(err) {
+    console.log(err.stack)
+  }else {
+    console.log(res.rows)
+  }
+})
+
+// Query to retreive a contact from database after his login
+const query6 = {
+  text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c=$2',
+  values: ['jane_gray@uoa.edu', 'lana2006']
+}
+client.query(query6, (err, res)=> {
+  if(err) {
+    console.log("Nous sommes désolés mais nous ne retrouvons aucun compte associé à ces données.")
+  }else {
+    console.log(res.rows)
+  }
+    
+})
+
+// Query when the contact has updated his contact details
+/*const query7 = {
+  text: 'UPDATE salesforce.Contact SET firstname=$1, lastname=$2, email=$3, phone= $4, mailingstreet=$5, mailingcity=$6, mailingcountry=$7 where sfid = $8',
+  values: ['Jane', 'Grey','jane_gray@uoa.edu','(520) 773-9050','888 N Euclid - Hallis Center, Room 501','Tucson','United States','00309000003IhHuAAK']  
+}
+
+client.query(query7, (err, res) => {
+  if(err) {
+    console.log("Nous sommes désolés mais nous n'avons pas pu mettre à jour vos informations.")
+    console.log(err)
+  }else {
+    console.log("Vos informations ont bien été mises à jour !")
+  }
+})/*
+
 
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
