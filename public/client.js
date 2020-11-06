@@ -5,7 +5,7 @@ console.log('Client-side code running');
 var emailInput = document.getElementById('inputEmail');
 var passwordInput = document.getElementById('inputPassword');
 const registerButton = document.getElementById('registerButton');
-const loginButton = document.getElementById("validateButton");
+const loginButton = document.getElementById("loginButton");
 var firstNameInput = document.getElementById("inputFirstName");
 var lastNameInput = document.getElementById("inputLastName");
 var footerLogin = document.getElementById("footerLogin");
