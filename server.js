@@ -57,16 +57,42 @@ app.post('/api/getContacts', (req, res) => {
 
 
 app.post('/api/getContracts', (req,res)=> {
-  client.query('SELECT * FROM salesforce.Contract').then(response => {
-    console.log('***** response', response);
-    res.status(200).json({ "message": "Il y'a " + response.rows.length + " contracts"});
-  }).catch(err => {
-    res.status(500).json({ "message": err});
   
-  })
+  const query = {
+    text: 'SELECT firstname FROM salesforce.Contact WHERE lastname = $1',
+    values: ['Grey'],
+    rowMode: 'array'
+  }
+
+  client.query(query, (err, res) => {
+    if (err) {
+      res.status(500).json({ "message": err});
+    } else {
+      res.status(200)
+      res.format ({
+        'application/json': function() {
+        res.send({ message: 'Bienvenue '+res.rows[0]+' dans votre espace personnel' });
+        }   
+      })
+    }
   });
+})
+  
 
 
+  const query = {
+    text: 'SELECT firstname FROM salesforce.Contact WHERE lastname = $1',
+    values: ['Grey'],
+    rowMode: 'array'
+  }
+
+  client.query(query, (err, res) => {
+    if (err) {
+      console.log(err.stack)
+    } else {
+      console.log('Bienvenue '+res.rows[0]+' dans votre espace personnel')
+    }
+  })
 
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
