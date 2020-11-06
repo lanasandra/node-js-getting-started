@@ -53,7 +53,7 @@ app.post('/api/getContacts', (req, res) => {
 });
 
 app.post('/api/getContracts', (req,res)=> {
-const text = 'SELECT firstname FROM salesforce.Contact where (LOWER)lastname=LOWER($1)'
+const text = 'SELECT firstname FROM salesforce.Contact where lastname=LOWER($1)'
 const values = ['Grey']
 client.query(text, values).then(response => {
     console.log('***** response', response);
