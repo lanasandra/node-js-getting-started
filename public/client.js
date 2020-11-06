@@ -83,11 +83,12 @@ getContractNumbers.addEventListener('click', function(e) {
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/api/getContracts', true);
+  xhr.responseType- "text"
   xhr.onload = function () {
       // do something to response
       response = xhr.response;
       console.log(response);
-    };
+  };
   xhr.send();
 });
 

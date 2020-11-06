@@ -68,15 +68,11 @@ app.post('/api/getContracts', (req,res)=> {
     if (err) {
       res.status(500).json({ "message": err});
     } else {
-      res.status(200)
-      res.format ({
-        'text/plain': function() {
-        res.send('Bienvenue '+res.rows[0]+' dans votre espace personnel');
+      res.send('Bienvenue '+res.rows[0]+' dans votre espace personnel');
         }   
-      })
-    }
-  });
+  })
 })
+
   
 
 
