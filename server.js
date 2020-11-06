@@ -53,9 +53,12 @@ app.post('/api/getContacts', (req, res) => {
 });
 
 app.post('/api/getContracts', (req,res)=> {
-const text = 'SELECT firstname FROM salesforce.Contact where lastname=LOWER($1)'
-const values = ['Grey']
-client.query(text, values).then(response => {
+  const query = {
+    text:'SELECT firstname FROM salesforce.Contact where lastname=LOWER($1)',
+    values: ['Grey'],
+    rowMode: 'array',
+  }
+client.query(query).then(response => {
     console.log('***** response', response);
     res.status(200).json({ "message": "Bienvenue " + response.rows[0] + " dans votre espace personnel"});
   }).catch(err => {
