@@ -1,3 +1,4 @@
+const { response } = require("express");
 
 console.log('Client-side code running');
 
@@ -70,15 +71,14 @@ loginButton.addEventListener('click', function(e){
   request.open('POST', 'api/login', true)
 
   request.onload = function () {
-    // Begin accessing JSON data here
-    var data = JSON.parse(this.response)
-  
+    
     if (request.status >= 200 && request.status < 400) {
   
       welcomePage.style.display="none";
       informationPage.style.display-"block";
-      
-      data.forEach((contact) => {
+      response = JSON.parse(xhr.response);
+
+      response.forEach((contact) => {
         console.log(contact.firstname, contact.lastname, contact.email, contact.phone, contact.mailingstreet, contact.mailingcity, contact.mailingcountry)
         document.getElementById("salesFirstName").innerHTML   = contact.firstname
         document.getElementById("salesLastName").innerHTML    = contact.lastname
