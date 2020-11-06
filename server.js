@@ -1,7 +1,8 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var pg = require('pg');
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const pg = require('pg');
+const app = express();
+
 
 app.set('port', process.env.PORT || 5432);
 
@@ -24,7 +25,8 @@ const client = new Client({
   port: 5432,
   user: 'fssmfnipgcsobv',
   password: '93036b8a23651dd59b8dd659b0a6af82d8e72992a2c0296212e87e9b2a46d80e',
-  database: 'd47lq5l2er5rkb'
+  database: 'd47lq5l2er5rkb',
+  idle_in_transaction_session_timeout: 10000
 })
 
 
@@ -60,6 +62,7 @@ app.get('api/getContracts', (req,res)=> {
   })
   });
 
+  console.log("Hello")
 
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
