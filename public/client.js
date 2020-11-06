@@ -18,6 +18,8 @@ var blocRegister = document.getElementById("blocRegister");
 var blocLogin = document.getElementById("blocLogin");
 const updateButton = document.getElementById("updateButton");
 var blocProductDetails = document.getElementById("blocProductDetails")
+var welcomePage = document.getElementById("welcomePage");
+var informationPage = document.getElementById("informationsPage")
 /*-----------------------------------------------------------------------*/
 
 // For test
@@ -59,19 +61,44 @@ function displayLoginPage() {
 
 loginButton.addEventListener('click', function(e){
 
-  // Get the email and password Input before sending requests
+  // Get the email and password inputs before sending requests
   var emailValue = emailInput.value;
   var passwordValue = passwordInput.value;
 
   // Create the request to send to server
   var request = new XMLHttpRequest()
+  request.open('POST', 'api/login', true)
 
+  request.onload = function () {
+    // Begin accessing JSON data here
+    var data = JSON.parse(this.response)
   
-
-
-
-
-})
+    if (request.status >= 200 && request.status < 400) {
+  
+      welcomePage.style.display="none";
+      informationPage.style.display-"block";
+      
+      data.forEach((contact) => {
+        console.log(contact.firstname, contact.lastname, contact.email, contact.phone, contact.mailingstreet, contact.mailingcity, contact.mailingcountry)
+        document.getElementById("salesFirstName").innerHTML   = contact.firstname
+        document.getElementById("salesLastName").innerHTML    = contact.lastname
+        document.getElementById("salesEmail").innerHTML       = contact.email
+        document.getElementById("salesPhoneNumber").innerHTML = contact.phone
+        document.getElementById("salesStreet").innerHTML      = contact.mailingstreet
+        document.getElementById("salesCity").innerHTML        = contact.mailingcity
+        document.getElementById("salesCountry").innerHTML     = contact.mailingcountry
+      })
+    } else {
+      console.log('error')
+    }
+  }
+  // Send request
+  request.send({
+    username: emailValue,
+    password: passwordValue
+  })
+  }
+)
 
 
 // Http Requests
@@ -93,22 +120,7 @@ getContactNumbers.addEventListener('click', function(e) {
   xhr.send();
 });
 
-getContractNumbers.addEventListener('click', function(e) {
-  e.preventDefault();
- 
-  console.log('button was clicked');
 
-  //On appelle notre route créée sur le serveur
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/api/getContracts', true);
-
-  xhr.onload = function () {
-      // do something to response
-      response = JSON.parse(xhr.response);
-      consolelog(response.message);
-  };
-  xhr.send();
-});
 // request to display contact details section based on Sfid
 function displayContactDetails(salesforceId){
 
@@ -123,6 +135,8 @@ request.onload = function () {
   var data = JSON.parse(this.response)
 
   if (request.status >= 200 && request.status < 400) {
+
+    
     data.forEach((contact) => {
       console.log(contact.firstname, contact.lastname, contact.email, contact.phone, contact.mailingstreet, contact.mailingcity, contact.mailingcountry)
       document.getElementById("salesFirstName").innerHTML   = contact.firstname

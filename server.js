@@ -55,12 +55,30 @@ app.post('/api/getContacts', (req, res) => {
     })
 });
 
+// Query to retrieve the contact details of the contact when logging
+app.post('api/login', (req,res)=> {
 
+  const query = {
+  text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c==$2',
+  values: [req.body.username, req.body.password],
+  }
+  client.query(query, (err, res)=> {
+    console.log('***** response', response);
+    if(err) {
+      console.log(err.stack)
+      res.status(500).json({ "message": err});
+    } else {
+      console.log(res.rows[0])
+      res.status(200).json(response.rows[0]);
+    }
+  })
+})
 
 app.post('/api/getContracts', (req,res)=> {
+console.log('enter')
   const query = {
     text: 'SELECT firstname FROM salesforce.Contact WHERE lastname = $1',
-    values: ['Grey'],
+    values: [ req.body.username ],
     rowMode: 'array'
   }
 
@@ -87,6 +105,9 @@ app.post('/api/getContracts', (req,res)=> {
       console.log('Bienvenue '+res.rows[0]+' dans votre espace personnel')
     }
   })
+
+
+
 
 // Query to set the password of the contact when registering
 /*const query2 = {
