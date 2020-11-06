@@ -86,7 +86,7 @@ getContractNumbers.addEventListener('click', function(e) {
   xhr.onload = function () {
       // do something to response
       response = Parse.JSON(xhr.response);
-      console.log(response);
+      console.log(response.message);
     };
   xhr.send();
 });
