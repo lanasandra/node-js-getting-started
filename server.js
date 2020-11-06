@@ -60,9 +60,9 @@ app.post('/api/getContracts', (req,res)=> {
   }
   client.query(query, (err, res) => {
     if (err) {
-      res.status(400).json(err.stack).send()
+      res.status(400).json(err.stack)
     } else {
-      res.status(200).json(res.rows[0]).send() // ['Brian', 'Carlson']
+      res.status(200).json(res.rows[0]) // ['Brian', 'Carlson']
     }
   })
 
