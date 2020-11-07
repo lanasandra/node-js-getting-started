@@ -70,10 +70,10 @@ loginButton.addEventListener('click', function(e){
   request.open('POST', 'api/login', true);
   //request.setRequestHeader('Content-Type', 'application/json');
   request.responseType = 'json';
-  var data = JSON.stringify({
-    'username': emailInput.value,
-    'password': passwordInput.value
-  })
+  var data = {
+    username: emailInput.value,
+    password: passwordInput.value
+  }
   console.log(data);
   request.send(data);
 
