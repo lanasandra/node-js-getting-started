@@ -71,8 +71,8 @@ loginButton.addEventListener('click', function(e){
   //request.setRequestHeader('Content-Type', 'application/json');
   request.responseType = 'json';
   var data = {
-    username: emailInput.value,
-    password: passwordInput.value
+    "username": emailInput.value,
+    "password": passwordInput.value
   }
   console.log(data);
   request.send(data);
@@ -80,7 +80,7 @@ loginButton.addEventListener('click', function(e){
   request.onload = function() {
     if (request.readyState === XMLHttpRequest.DONE) {
       if (request.status === 200) {
-        let response = request.response;
+        let response = Parse.JSON(request.response);
         console.log(response);
       
         // display contact informations 
