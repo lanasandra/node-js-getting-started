@@ -84,7 +84,7 @@ loginButton.addEventListener('click', function(e){
         console.log(response);
       
         // display contact informations 
-         welcomePage.style.display="none";
+        welcomePage.style.display="none";
         informationPage.style.display-"block";
         response.forEach((contact) => {
         console.log(contact.firstname, contact.lastname, contact.email, contact.phone, contact.mailingstreet, contact.mailingcity, contact.mailingcountry)
