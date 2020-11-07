@@ -70,9 +70,9 @@ loginButton.addEventListener('click', function(e){
   request.responseType = 'json';
   request.send('username='+emailInput.value&'password='+passwordInput.value);
 
-  requete.onload = function() {
-    if (reques.readyState === XMLHttpRequest.DONE) {
-      if (reques.status === 200) {
+  request.onload = function() {
+    if (request.readyState === XMLHttpRequest.DONE) {
+      if (request.status === 200) {
         let response = request.response;
         console.log(response);
       
