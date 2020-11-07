@@ -57,21 +57,22 @@ app.post('/api/getContacts', (req, res) => {
 
 // Query to retrieve the contact details of the contact when logging
 app.post('api/login', (req,res)=> {
-
+  var emailValue = req.body.username;
+  var passwordValue = req.body.password;
   const query = {
   text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c==$2',
-  values: [req.body.username, req.body.password]
+  values: [emailValue, passwordValue]
   }
   console.log(req.body.username, req.body.password)
 
   client.query(query, (err, res)=> {
-    console.log('***** response', response);
+    console.log('***** response', res);
     if(err) {
       console.log(err.stack)
       res.status(500).json({ "message": err});
     } else {
-      console.log(res.rows[0])
-      res.status(200).json(response.rows);
+      console.log(res.rows)
+      res.status(200).json(res.rows);
     }
   })
 })
