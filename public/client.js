@@ -72,6 +72,7 @@ loginButton.addEventListener('click', function(e){
     'username': emailInput.value,
     'password': passwordInput.value
   }
+  console.log(data);
   request.send(data);
 
   request.onload = function() {
