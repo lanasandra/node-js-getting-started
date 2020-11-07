@@ -85,7 +85,6 @@ app.post('api/login', (req,res)=> {
   text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c=$2',
   values: ['jane_gray@uoa.edu', 'lana2006']
   }
-  console.log(values)
   client.query(query45, (err, res)=> {
    
    if(err) {

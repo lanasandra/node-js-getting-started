@@ -62,7 +62,7 @@ function displayLoginPage() {
 
 // Action on Login Button
 
-loginButton.addEventListener('click', function(e){
+/*loginButton.addEventListener('click', function(e){
 
   //console.log(emailInput.value, passwordInput.value)
 
@@ -101,10 +101,10 @@ loginButton.addEventListener('click', function(e){
       }
     }
   }
-})
+})*/
 
 
-// Http Requests
+// Http Requests TEST
 
 getContactNumbers.addEventListener('click', function(e) {
   e.preventDefault();
@@ -114,6 +114,23 @@ getContactNumbers.addEventListener('click', function(e) {
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/api/getContacts', true);
+  xhr.onload = function () {
+      // do something to response
+      console.log("xhr.response", xhr.response);
+      response = JSON.parse(xhr.response);
+      console.log("response", response);
+    };
+  xhr.send();
+});
+
+loginButton.addEventListener('click', function(e) {
+  e.preventDefault();
+ 
+  console.log('button was clicked');
+
+  //On appelle notre route créée sur le serveur
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/login', true);
   xhr.onload = function () {
       // do something to response
       console.log("xhr.response", xhr.response);
