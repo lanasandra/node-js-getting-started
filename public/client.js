@@ -123,7 +123,7 @@ getContactNumbers.addEventListener('click', function(e) {
   xhr.send();
 });
 
-loginButton.addEventListener('click', function(e) {
+/*loginButton.addEventListener('click', function(e) {
   e.preventDefault();
  
   console.log('button was clicked');
@@ -140,6 +140,7 @@ loginButton.addEventListener('click', function(e) {
   xhr.send();
 });
 
+*/
 
 // request to display contact details section based on Sfid
 function displayContactDetails(salesforceId){
