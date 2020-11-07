@@ -85,16 +85,13 @@ app.post('api/login', (req,res)=> {
   text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c=$2',
   values: ['jane_gray@uoa.edu', 'lana2006']
   }
-  client.query(query45, (err, res)=> {
-   
-   if(err) {
-     console.log(err.stack)
-     res.status(500).json({ "message": err});
-    } else {
-     console.log(res.rows)
-     res.status(200).json(res.rows);
-    }
-  })
+  client.query(query45).then(response => {
+    console.log('***** response', response);
+    res.status(200).json(response.rows);
+}).catch(err => {
+    res.status(500).json({ "message": err});
+
+})
 });
 
 app.post('/api/getContracts', (req,res)=> {
