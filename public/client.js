@@ -68,7 +68,7 @@ loginButton.addEventListener('click', function(e){
   request.open('POST', 'api/login', true);
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   request.responseType = 'json';
-  requete.send('username='+emailInput.value&'password='+passwordInput.value);
+  request.send('username='+emailInput.value&'password='+passwordInput.value);
 
   requete.onload = function() {
     if (reques.readyState === XMLHttpRequest.DONE) {
