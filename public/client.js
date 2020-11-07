@@ -1,3 +1,5 @@
+const { json } = require("express");
+
 console.log('Client-side code running');
 
 // Variables
@@ -66,12 +68,12 @@ loginButton.addEventListener('click', function(e){
 
   let request = new XMLHttpRequest();
   request.open('POST', 'api/login', true);
-  request.setRequestHeader('Content-Type', 'application/json');
+  //request.setRequestHeader('Content-Type', 'application/json');
   request.responseType = 'json';
-  var data = {
+  var data = JSON.stringify({
     'username': emailInput.value,
     'password': passwordInput.value
-  }
+  })
   console.log(data);
   request.send(data);
 
