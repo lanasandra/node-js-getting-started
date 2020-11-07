@@ -81,11 +81,11 @@ app.post ('/api/test', (req,res)=>{
 // Query to retrieve the contact details of the contact when logging
 app.post('api/login', (req,res)=> {
   
-  const query45 = {
-  text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c=$2',
-  values: ['jane_gray@uoa.edu', 'lana2006']
-  }
-  client.query(query45).then(response => {
+  //const query45 = {
+  //text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c=$2',
+  //values: ['jane_gray@uoa.edu', 'lana2006']
+  //}
+  client.query('SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=jane_gray@uoa.edu').then(response => {
     console.log('***** response', response);
     res.status(200).json(response.rows);
 }).catch(err => {
