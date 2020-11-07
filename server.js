@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const pg = require('pg');
 const app = express();
 
-
 app.set('port', process.env.PORT || 5432);
 
 app.use(express.static('public'));
@@ -55,26 +54,49 @@ app.post('/api/getContacts', (req, res) => {
     })
 });
 
+// test
+
+app.post ('/api/test', (req,res)=>{
+  
+    console.log("'"+req.body.username+"'");
+    console.log("'"+req.body.password+"'");
+
+
+    if (!req.body.username) {
+      return res.status(400).json({
+        status: 'error',
+        error: 'Vous devez saisir votre email et mot de passe pour vous connecter',
+      });
+    }
+  
+    res.status(200).json({
+      "message": "'"+req.body.username+"'"+"et"+"'"+req.body.password+"'"
+    })
+    console.log("'"+req.body.username+"'")
+
+});
+
+
+
 // Query to retrieve the contact details of the contact when logging
 app.post('api/login', (req,res)=> {
-    
-  const query = {
+  
+  const query45 = {
   text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c=$2',
-  values: [req.body.username, req.body.password]
+  values: ['jane_gray@uoa.edu', 'lana2006']
   }
-  console.log(req.body.username, req.body.password)
-
-  client.query(query, (err, res)=> {
-    console.log('***** response', res);
-    if(err) {
-      console.log(err.stack)
-      res.status(500).json({ "message": err});
+  console.log(values)
+  client.query(query45, (err, res)=> {
+   
+   if(err) {
+     console.log(err.stack)
+     res.status(500).json({ "message": err});
     } else {
-      console.log(res.rows)
-      res.status(200).json(res.rows);
+     console.log(res.rows)
+     res.status(200).json(res.rows);
     }
   })
-})
+});
 
 app.post('/api/getContracts', (req,res)=> {
 console.log('enter')
