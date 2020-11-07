@@ -32,6 +32,7 @@ const client = new Client({
 
 var salesforcId;
 
+
 // connexion à postgres
 client.connect(err => {
     if (err) {
@@ -58,22 +59,7 @@ app.post('/api/getContacts', (req, res) => {
 
 app.post ('/api/test', (req,res)=>{
   
-    console.log("'"+req.body.username+"'");
-    console.log("'"+req.body.password+"'");
-
-
-    if (!req.body.username) {
-      return res.status(400).json({
-        status: 'error',
-        error: 'Vous devez saisir votre email et mot de passe pour vous connecter',
-      });
-    }
-  
-    res.status(200).json({
-      "message": "'"+req.body.username+"'"+"et"+"'"+req.body.password+"'"
-    })
-    console.log("'"+req.body.username+"'")
-
+    
 });
 
 
@@ -81,13 +67,13 @@ app.post ('/api/test', (req,res)=>{
 // Query to retrieve the contact details of the contact when logging
 app.post('api/login', (req,res)=> {
   
-  const query45 = {
+  const query = {
   text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c=$2',
   values: ['jane_gray@uoa.edu', 'lana2006']
   }
-  client.query(query45).then(response => {
-        console.log('***** response', response);
-        res.status(200).json(response.rows);
+  client.query(query).then(response => {
+        
+        res.status(200).json(response.rows[0]);
     }).catch(err => {
         res.status(500).json({ "message": err});
 
@@ -126,28 +112,13 @@ console.log('enter')
     }
   })
 
-loginButton.addEventListener('click', function(e) {
+
   
-  var password = 'lana2006'
-  var email = 'jane_gray@uoa.edu'
+  
 
-// Query using  variables as values 
 
-const query32 = {
-  text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where password__c=$1 AND Email=$2',
-  values: [password, email]
-  }
-  client.query(query32).then(response => {
-        console.log('Résultat en utilisant des variables')
-        //res.status(200).json(response.rows);
-        console.log(response.rows)
-    }).catch(err => {
-    
-        //res.status(500).json({ "message": err});
+  
 
-    })
-
-  })
 
 // Query to set the password of the contact when registering
 /*const query2 = {

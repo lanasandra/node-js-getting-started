@@ -62,13 +62,13 @@ function displayLoginPage() {
 
 // Action on Login Button
 
-/*loginButton.addEventListener('click', function(e){
+loginButton.addEventListener('click', function(e){
 
   //console.log(emailInput.value, passwordInput.value)
 
   let request = new XMLHttpRequest();
   request.open('POST', 'api/login', true);
-  //request.setRequestHeader('Content-Type', 'application/json');
+  request.setRequestHeader('Content-Type', 'application/json');
   request.responseType = 'json';
   //var data = JSON.stringify({
     //"username": emailInput.value,
@@ -101,7 +101,7 @@ function displayLoginPage() {
       }
     }
   }
-})*/
+})
 
 
 // Http Requests TEST
