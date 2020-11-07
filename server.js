@@ -60,9 +60,10 @@ app.post('api/login', (req,res)=> {
 
   const query = {
   text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c==$2',
-  values: [req.params.username, req.params.password]
+  values: [req.body.username, req.body.password]
   }
-  console.log(req.params.username, req.params.password)
+  console.log(req.body.username, req.body.password)
+
   client.query(query, (err, res)=> {
     console.log('***** response', response);
     if(err) {
@@ -70,7 +71,7 @@ app.post('api/login', (req,res)=> {
       res.status(500).json({ "message": err});
     } else {
       console.log(res.rows[0])
-      res.status(200).json(response.rows[0]);
+      res.status(200).json(response.rows);
     }
   })
 })

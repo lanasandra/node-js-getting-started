@@ -56,27 +56,30 @@ function displayLoginPage() {
 
 /*-----------------------------------------------------------------------*/
 
+
+
 // Action on Login Button
 
 loginButton.addEventListener('click', function(e){
 
-  // Get the email and password inputs before sending requests
-  var emailValue = emailInput.value;
-  var passwordValue = passwordInput.value;
+  console.log(emailInput.value, passwordInput.value)
 
-  // Create the request to send to server
-  var request = new XMLHttpRequest()
-  request.open('POST', 'api/login', true)
+  let request = new XMLHttpRequest();
+  request.open('POST', 'api/login', true);
+  request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  request.responseType = 'json';
+  requete.send('username='+emailInput.value&'password='+passwordInput.value);
 
-  request.onload = function () {
-    
-    if (request.status >= 200 && request.status < 400) {
-  
-      welcomePage.style.display="none";
-      informationPage.style.display-"block";
-      response = JSON.parse(xhr.response);
-
-      response.forEach((contact) => {
+  requete.onload = function() {
+    if (reques.readyState === XMLHttpRequest.DONE) {
+      if (reques.status === 200) {
+        let response = request.response;
+        console.log(response);
+      
+        // display contact informations 
+         welcomePage.style.display="none";
+        informationPage.style.display-"block";
+        response.forEach((contact) => {
         console.log(contact.firstname, contact.lastname, contact.email, contact.phone, contact.mailingstreet, contact.mailingcity, contact.mailingcountry)
         document.getElementById("salesFirstName").innerHTML   = contact.firstname
         document.getElementById("salesLastName").innerHTML    = contact.lastname
@@ -85,18 +88,13 @@ loginButton.addEventListener('click', function(e){
         document.getElementById("salesStreet").innerHTML      = contact.mailingstreet
         document.getElementById("salesCity").innerHTML        = contact.mailingcity
         document.getElementById("salesCountry").innerHTML     = contact.mailingcountry
-      })
-    } else {
-      console.log('error')
+        })
+      } else {
+      alert('Un problème est intervenu, merci de revenir plus tard.');
+      }
     }
   }
-  // Send request
-  request.send({
-    username: emailValue,
-    password: passwordValue
-  })
-  }
-)
+})
 
 
 // Http Requests
