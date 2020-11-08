@@ -49,8 +49,8 @@ app.post('/api/getContacts', (req, res) => {
   
   const query = {
     text: 'SELECT * FROM salesforce.Contact where password__c=$1',
-    values: [req.body]
-  }
+    values: [req.body.password]
+    }
   client.query(query).then(response => {
      
     res.status(200).json(response.rows);

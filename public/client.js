@@ -123,13 +123,15 @@ loginButton.addEventListener('click', function(e) {
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/api/getContacts', true);
+  xhr.setRequestHeader("Content-type", "application/json");
   xhr.onload = function () {
       // do something to response
       console.log("xhr.response", xhr.response);
       response = JSON.parse(xhr.response);
       console.log("response", response);
     };
-  xhr.send("'"+passwordInput.value+"'");
+  xhr.send({
+    password: "'"+passwordInput.value+"'"});
 });
 
 /*loginButton.addEventListener('click', function(e) {
