@@ -139,16 +139,16 @@ function displayLegarantProduct() {
       // do something to response
       //console.log("xhr.response", xhr.response);
       response = JSON.parse(xhr.response);
-      console.log("response", response.rows);
+      console.log("response", response);
       console.log(response[0]);
-        // display product informations 
         
-        /*for(let i = 0; i < 10; i++) {
-          //if(response[i]) 
+      // display product informations 
+        
+        for(let i = 0; i < 10; i++) {
 
-        var productCode                               = response.productcode;
-        var productName                               = response.name;
-        var productPrice                              = response.unitprice;
+        var productCode                               = response.productcode[i];
+        var productName                               = response.name[i];
+        var productPrice                              = response.unitprice[i];
 
         var productItem                               = document.createElement("div"); 
             productItem.className                     = "productItem";
@@ -168,8 +168,9 @@ function displayLegarantProduct() {
 
             productCodeItem.innerHTML                 = "Product Code: "+productCode;
             productNameItem.innerHTML                 = "Product Name: "+productName;
-            productPriceItem.innerHTML                = "Unit Price: "+productPrice+" €";  */
+            productPriceItem.innerHTML                = "Unit Price: "+productPrice+" €";  
       
         }
+      }
   xhr.send();
 }
