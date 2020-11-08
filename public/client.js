@@ -128,7 +128,7 @@ loginButton.addEventListener('click', function(e) {
       response = JSON.parse(xhr.response);
       console.log("response", response);
     };
-  xhr.send(SON.stringify(
+  xhr.send(JSON.stringify(
     {passwordInput: passwordInput.value}));
 });
 
