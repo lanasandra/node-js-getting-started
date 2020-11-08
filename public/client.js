@@ -1,8 +1,6 @@
-const { response } = require("express");
-
 console.log('Client-side code running');
 
-// Variables
+// Variables declaration
 var emailInput = document.getElementById('inputEmail');
 var passwordInput = document.getElementById('inputPassword');
 const registerButton = document.getElementById('registerButton');
