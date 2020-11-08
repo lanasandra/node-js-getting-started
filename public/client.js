@@ -130,8 +130,8 @@ loginButton.addEventListener('click', function(e) {
       response = JSON.parse(xhr.response);
       console.log("response", response);
     };
-  xhr.send({
-    password: "'"+passwordInput.value+"'"});
+  xhr.send(JSON.stringify({
+    password: "'"+passwordInput.value+"'"}));
 });
 
 /*loginButton.addEventListener('click', function(e) {
