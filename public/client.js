@@ -81,6 +81,9 @@ loginButton.addEventListener('click', function(e) {
       // Call function to display contract details
         displayContractDetails(response.sfid);
 
+      // Call function to display Legarant products
+
+        displayLegarantProduct();
       
         // display contact informations 
         welcomePage.style.display="none";
