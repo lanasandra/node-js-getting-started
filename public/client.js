@@ -128,7 +128,7 @@ loginButton.addEventListener('click', function(e) {
       // do something to response
       //console.log("xhr.response", xhr.response);
       response = JSON.parse(xhr.response);
-      console.log("response", response[0].firstname);
+      console.log("response", response.firstname);
 
       
         // display contact informations 
