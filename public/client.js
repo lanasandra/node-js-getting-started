@@ -121,6 +121,8 @@ registerButton.addEventListener('click', function(e){
       response = JSON.parse(xhr.response);
       console.log("response", response.sfid);
 
+      alert("Votre mot de passe a bien été enregistré !");
+      
       // Call function to display contract details
         displayContractDetails(response.sfid);
 
