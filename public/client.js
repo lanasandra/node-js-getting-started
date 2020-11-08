@@ -145,23 +145,24 @@ function displayLegarantProduct() {
       // display product informations 
 
       for(var product in response ) {
-        var productCode                               = product.productcode;
-        var productName                               = product.name;
-        var productPrice                              = product.unitprice;
+        var productCode                                 = product.productcode;
+        var productName                                 = product.name;
+        var productPrice                                = product.unitprice;
 
-        var productItem                               = document.createElement("div"); 
-            productItem.className                     = "productItem";
+        var productItem                                 = document.createElement("div"); 
+            productItem.className                       = "productItem";
+            blocProductDetails.appendChild(productItem)
 
-        var productCodeItem                           = document.createElement("p");
-            productCodeItem.className                 = "productCodeItem";
+        var productCodeItem                             = document.createElement("p");
+            productCodeItem.className                   = "productCodeItem";
             productItem.appendChild(productCodeItem);
     
-        var productNameItem                           = document.createElement("p");
-            productNameItem.className                 = "productNameItem";
+        var productNameItem                             = document.createElement("p");
+            productNameItem.className                   = "productNameItem";
             productItem.appendChild(productNameItem);
       
-        var productPriceItem                          = document.createElement("p");
-            productPriceItem.className                = "productPriceItem";
+        var productPriceItem                            = document.createElement("p");
+            productPriceItem.className                  = "productPriceItem";
             productItem.appendChild(productPriceItem);
 
 
