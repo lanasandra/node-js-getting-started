@@ -93,7 +93,7 @@ loginButton.addEventListener('click', function(e) {
         document.getElementById("salesLastName").value    = response.lastname
         document.getElementById("salesEmail").value       = response.email
         document.getElementById("salesPhoneNumber").value = response.phone
-        document.getElementById("salesStreet").valueL      = response.mailingstreet
+        document.getElementById("salesStreet").value      = response.mailingstreet
         document.getElementById("salesCity").value        = response.mailingcity
         document.getElementById("salesCountry").value     = response.mailingcountry
        

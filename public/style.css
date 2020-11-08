@@ -96,7 +96,7 @@ text-align: left;
   background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgba(177,227,145,1) 100%);
   border: none;
   border-radius: 5px;
-  color: white;
+  color: grey;
   padding-left: 3px;
 
 }
@@ -116,12 +116,15 @@ text-align: left;
 */
 #salesFirstName, #salesLastName, #salesEmail, #salesPhoneNumber, #salesStreet, #salesCity, #salesCountry
 {
+  font-size: 1em;
+  font-family: 'Source Sans Pro', arial, sans-serif;
   border: none;
   border-width:0px;
   background-color: #F5F5F5;
   color: grey;
   padding-left: 10px;
   margin-left: 5px;
+
 
 }
 
