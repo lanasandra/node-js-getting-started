@@ -101,19 +101,6 @@ text-align: left;
 
 }
 
-/*
-[contenteditable]:focus {
-  outline: 5px solid transparent;
-  color: green;
-  font-weight: bold ;
-}
-
-[contenteditable]
-{
-  padding-left: 10px;
-}
-
-*/
 #salesFirstName, #salesLastName, #salesEmail, #salesPhoneNumber, #salesStreet, #salesCity, #salesCountry
 {
   font-size: 1em;
@@ -124,11 +111,12 @@ text-align: left;
   color: grey;
   padding-left: 10px;
   margin-left: 5px;
-
-
 }
 
-
+#salesStreet
+{
+  width: 280px;
+}
 
 #informationsPage
 {

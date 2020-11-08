@@ -105,6 +105,56 @@ loginButton.addEventListener('click', function(e) {
 });
 
 
+registerButton.addEventListener('click', function(e){
+  e.preventDefault();
+ 
+  console.log('button was clicked');
+  
+
+  //On appelle notre route créée sur le serveur
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/register', true);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.onload = function () {
+      // do something to response
+      //console.log("xhr.response", xhr.response);
+      response = JSON.parse(xhr.response);
+      console.log("response", response.sfid);
+
+      // Call function to display contract details
+        displayContractDetails(response.sfid);
+
+      // Call function to display Legarant products
+
+        displayLegarantProduct();
+      
+        // display contact informations 
+        welcomePage.style.display="none";
+        informationsPage.style.display="block";
+
+        document.getElementById("welcomePersonalSpace").textContent = "Welcome "+response.firstname+" to your personal space";
+        console.log("Welcome "+response.firstname+" to your personal space");
+        document.getElementById("salesFirstName").value   = response.firstname
+        document.getElementById("salesLastName").value    = response.lastname
+        document.getElementById("salesEmail").value       = response.email
+        document.getElementById("salesPhoneNumber").value = response.phone
+        document.getElementById("salesStreet").value      = response.mailingstreet
+        document.getElementById("salesCity").value        = response.mailingcity
+        document.getElementById("salesCountry").value     = response.mailingcountry
+       
+  
+
+    };
+  xhr.send(JSON.stringify({
+    password: passwordInput.value,
+    firstName: firstNameInput.value,
+    lastName: lastNameInput.value,
+    email: emailInput.value
+    }));
+});
+
+
+
 function displayContractDetails(salesforceId){
 
   var xhr = new XMLHttpRequest();
@@ -178,6 +228,7 @@ function displayProducts(product){
       productPriceItem.innerHTML                = "Unit Price: "+euro.format(productPrice);  
 
 }
+
 
 // Formating the product price
 const euro = new Intl.NumberFormat('en-EN', {

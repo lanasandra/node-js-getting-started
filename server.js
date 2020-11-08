@@ -100,24 +100,24 @@ const query = {
 });
 
 
-
-
-app.post('/api/getContracts', (req,res)=> {
-console.log('enter')
+// Création d'une route pour récupérer le contact et sauvegarder son password
+app.post('/api/register', (req, res) => {
+  
   const query = {
-    text: 'SELECT firstname FROM salesforce.Contact WHERE lastname = $1',
-    values: [ req.body.username ],
-    rowMode: 'array'
-  }
-
-  client.query(query, (err, res) => {
-    if (err) {
-      res.status(500).json({ "message": err});
-    } else {
-        res.status(200).json({ "message": 'Bienvenue '+res.rows[0]+' dans votre espace personnel'});
-      }
+    text: 'UPDATE salesforce.Contact SET password__c = $1 WHERE firstname = $2 AND lastname=$3 AND email=$4 RETURNING sfid',
+    values: [req.body.password, req.body.firstName, req.body.lastName, req.body.email]
+    }
+  client.query(query).then(response => {
+     
+    res.status(200).json(response.rows[0]);
+    console.log(response.rows);
+  }).catch(err => {
+    res.status(500).json({ "message": err});
+   console.log({ "message": err});
+  
   })
-})
+});
+
 
 
   
