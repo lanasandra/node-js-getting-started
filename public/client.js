@@ -118,7 +118,7 @@ loginButton.addEventListener('click', function(e) {
   e.preventDefault();
  
   console.log('button was clicked');
-
+  console.log(passwordInput.value);
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/api/getContacts', true);
