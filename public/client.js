@@ -88,7 +88,7 @@ loginButton.addEventListener('click', function(e) {
         informationsPage.style.display="block";
 
         document.getElementById("welcomePersonalSpace").innertHTML = "Welcome "+response.firstname+" to your personal space";
-       
+        console.log("Welcome "+response.firstname+" to your personal space");
         document.getElementById("salesFirstName").innerHTML   = response.firstname
         document.getElementById("salesLastName").innerHTML    = response.lastname
         document.getElementById("salesEmail").innerHTML       = response.email
