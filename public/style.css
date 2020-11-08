@@ -93,13 +93,15 @@ text-align: left;
 
 .productItem
 {
-  background: linear-gradient(0deg, rgba(191,196,204,1) 0%, rgba(245,245,245,1) 100%);
+  background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgba(177,227,145,1) 100%);
   border: none;
   border-radius: 5px;
   color: white;
   padding-left: 3px;
 
 }
+
+/*
 [contenteditable]:focus {
   outline: 5px solid transparent;
   color: green;
@@ -111,6 +113,12 @@ text-align: left;
   padding-left: 10px;
 }
 
+*/
+#salesFirstName, #salesLastName, #salesEmail, #salesPhoneNumber, #salesStreet, #salesCity, #salesCountry
+{
+  border: none;
+  
+}
 
 #informationsPage
 {
