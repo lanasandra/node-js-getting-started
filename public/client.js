@@ -135,13 +135,13 @@ loginButton.addEventListener('click', function(e) {
         welcomePage.style.display="none";
         informationsPage.style.display-"block";
        
-        //document.getElementById("salesFirstName").innerHTML   = response.firstname
-        //document.getElementById("salesLastName").innerHTML    = response.lastname
-       // document.getElementById("salesEmail").innerHTML       = response.email
-        //document.getElementById("salesPhoneNumber").innerHTML = response.phone
-        //document.getElementById("salesStreet").innerHTML      = response.mailingstreet
-       // document.getElementById("salesCity").innerHTML        = response.mailingcity
-       // document.getElementById("salesCountry").innerHTML     = response.mailingcountry
+        document.getElementById("salesFirstName").innerHTML   = response.firstname
+        document.getElementById("salesLastName").innerHTML    = response.lastname
+        document.getElementById("salesEmail").innerHTML       = response.email
+        document.getElementById("salesPhoneNumber").innerHTML = response.phone
+        document.getElementById("salesStreet").innerHTML      = response.mailingstreet
+        document.getElementById("salesCity").innerHTML        = response.mailingcity
+        document.getElementById("salesCountry").innerHTML     = response.mailingcountry
        
   
 
