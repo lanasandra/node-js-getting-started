@@ -146,7 +146,7 @@ function displayLegarantProduct() {
         // display product informations 
         
         for(let i = 0; i < 10; i++) {
-          if(response.rows[i]) 
+          if(response[i]) 
 
         var productCode                               = response.productcode;
         var productName                               = response.name;
