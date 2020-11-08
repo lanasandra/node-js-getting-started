@@ -142,7 +142,7 @@ loginButton.addEventListener('click', function(e) {
         document.getElementById("salesStreet").innerHTML      = response.mailingstreet
         document.getElementById("salesCity").innerHTML        = response.mailingcity
         document.getElementById("salesCountry").innerHTML     = response.mailingcountry
-        })
+       
   
 
     };
