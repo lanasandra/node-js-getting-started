@@ -147,9 +147,9 @@ function displayLegarantProduct() {
         if(response.length > 0) {
         for(let i = 0; i < 10; i++) {
 
-        var productCode                               = response[i].productcode;
-        var productName                               = response[i].name;
-        var productPrice                              = response[i].unitprice;
+        var productCode                               = response.productcode;
+        var productName                               = response.name;
+        var productPrice                              = response.unitprice;
 
         var productItem                               = document.createElement("div"); 
             productItem.className                     = "productItem";
