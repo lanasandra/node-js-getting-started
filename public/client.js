@@ -63,10 +63,13 @@ function displayLoginPage() {
 // Action on Login Button
 
 loginButton.addEventListener('click', function(e){
+  e.preventDefault();
 
   //console.log(emailInput.value, passwordInput.value)
 
-  let request = new XMLHttpRequest();
+  try {
+  
+    let request = new XMLHttpRequest();
   request.open('POST', 'api/login', true);
   request.setRequestHeader('Content-Type', 'application/json');
   request.responseType = 'json';
@@ -101,6 +104,10 @@ loginButton.addEventListener('click', function(e){
       }
     }
   }
+} catch {
+  (err)
+  console.log(err)
+}
 })
 
 
