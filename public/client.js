@@ -134,15 +134,14 @@ loginButton.addEventListener('click', function(e) {
         // display contact informations 
         welcomePage.style.display="none";
         informationPage.style.display-"block";
-        response.forEach((contact) => {
-        console.log(contact.firstname, contact.lastname, contact.email, contact.phone, contact.mailingstreet, contact.mailingcity, contact.mailingcountry)
-        document.getElementById("salesFirstName").innerHTML   = contact.firstname
-        document.getElementById("salesLastName").innerHTML    = contact.lastname
-        document.getElementById("salesEmail").innerHTML       = contact.email
-        document.getElementById("salesPhoneNumber").innerHTML = contact.phone
-        document.getElementById("salesStreet").innerHTML      = contact.mailingstreet
-        document.getElementById("salesCity").innerHTML        = contact.mailingcity
-        document.getElementById("salesCountry").innerHTML     = contact.mailingcountry
+       
+        document.getElementById("salesFirstName").innerHTML   = response.firstname
+        document.getElementById("salesLastName").innerHTML    = response.lastname
+        document.getElementById("salesEmail").innerHTML       = response.email
+        document.getElementById("salesPhoneNumber").innerHTML = response.phone
+        document.getElementById("salesStreet").innerHTML      = response.mailingstreet
+        document.getElementById("salesCity").innerHTML        = response.mailingcity
+        document.getElementById("salesCountry").innerHTML     = response.mailingcountry
         })
   
 
