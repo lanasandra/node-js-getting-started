@@ -117,10 +117,10 @@ function displayContractDetails(salesforceId){
       
         // display contract informations 
         
-        document.getElementById("contactContractNumber").innerHTML    = "Contract Number: "+contract.contractnumber;
-        document.getElementById("contactContractStartDate").innerHTML = "Contract Start Date: "+contract.startdate;
-        document.getElementById("contactContractEndDate").innerHTML   = "Contract End Date: "+contract.enddate;
-        document.getElementById("contactContractTerm").innerHTML      = "Contract Term (months): "+contract.contractnumber;
+        document.getElementById("contactContractNumber").innerHTML    = "Contract Number: "+response.contractnumber;
+        document.getElementById("contactContractStartDate").innerHTML = "Contract Start Date: "+response.startdate;
+        document.getElementById("contactContractEndDate").innerHTML   = "Contract End Date: "+response.enddate;
+        document.getElementById("contactContractTerm").innerHTML      = "Contract Term (months): "+response.contractnumber;
        
   
 
