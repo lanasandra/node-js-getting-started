@@ -1,3 +1,4 @@
+const { response } = require("express");
 
 console.log('Client-side code running');
 
@@ -144,9 +145,8 @@ function displayLegarantProduct() {
       console.log(response[0]);
         
       // display product informations 
-        if(response.length > 0) {
-        for(let i = 0; i < 10; i++) {
-
+      
+       response.forEach(element => {
         var productCode                               = response.productcode;
         var productName                               = response.name;
         var productPrice                              = response.unitprice;
@@ -170,9 +170,8 @@ function displayLegarantProduct() {
             productCodeItem.innerHTML                 = "Product Code: "+productCode;
             productNameItem.innerHTML                 = "Product Name: "+productName;
             productPriceItem.innerHTML                = "Unit Price: "+productPrice+" €";  
-      
-        }
-      }
+       }); 
+ 
       }
   xhr.send();
 }
