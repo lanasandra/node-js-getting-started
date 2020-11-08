@@ -118,8 +118,8 @@ function displayContractDetails(salesforceId){
         // display contract informations 
         
         document.getElementById("contactContractNumber").innerHTML    = "Contract Number: "+response.contractnumber;
-        document.getElementById("contactContractStartDate").innerHTML = "Contract Start Date: "+(response.startdate).toISOString().slice(0,10);
-        document.getElementById("contactContractEndDate").innerHTML   = "Contract End Date: "+(response.enddate).toISOString().slice(0,10);
+        document.getElementById("contactContractStartDate").innerHTML = "Contract Start Date: "+response.startdate;
+        document.getElementById("contactContractEndDate").innerHTML   = "Contract End Date: "+response.enddate;
         document.getElementById("contactContractTerm").innerHTML      = "Contract Term (months): "+response.contractterm;
        
   
@@ -132,23 +132,22 @@ function displayContractDetails(salesforceId){
  
 function displayLegarantProduct() {
 
-  // Create a request variable and assign a new XMLHttpRequest object to it.
-  var request = new XMLHttpRequest()
-  
-  // Open a new connection, using the POST request on the URL endpoint
-  request.open('POST', 'api/getProducts', true)
-  
-  request.onload = function() {
-    // Begin accessing JSON data here
-    var data = JSON.parse(this.response)
-  
-    if (request.status >= 200 && request.status < 400) {
-      data.forEach((product) => {
-        console.log(product.productcode, product.name, product.unitprice)
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/getProducts', true);
+  xhr.onload = function () {
+      // do something to response
+      //console.log("xhr.response", xhr.response);
+      response = JSON.parse(xhr.response);
+      console.log("response", response.rows);
+      
+        // display product informations 
+        
+        for(let i = 0; i < 10; i++) {
+          if(response.rows[i]) 
 
-        var productCode                               = product.productcode;
-        var productName                               = product.name;
-        var productPrice                              = product.unitprice;
+        var productCode                               = response.productcode;
+        var productName                               = response.name;
+        var productPrice                              = response.unitprice;
 
         var productItem                               = document.createElement("div"); 
             productItem.className                     = "productItem";
@@ -168,13 +167,10 @@ function displayLegarantProduct() {
 
             productCodeItem.innerHTML                 = "Product Code: "+productCode;
             productNameItem.innerHTML                 = "Product Name: "+productName;
-            productPriceItem.innerHTML                = "Unit Price: "+productName+" €";           
-      })
-    } else {
-      console.log('error')
-    }
-  }
-  
-  // Send request
-  request.send()
+            productPriceItem.innerHTML                = "Unit Price: "+productPrice+" €";   
+      
+        }
+
+    };
+  xhr.send();
 }

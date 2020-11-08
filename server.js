@@ -79,30 +79,28 @@ app.post('/api/getContract', (req, res) => {
   })
 });
 
-// test
+// Creation d'une route POST pour récupérer mes produits
+app.post('/api/getProducts', (req, res) => {
 
-app.post ('/api/test', (req,res)=>{
-  
-    
-});
+  // Query to retreive the products details where pricebook is Legarant pricebook
+const query = {
+  text: 'SELECT productcode, name, unitprice from Salesforce.PriceBookEntry where pricebook2id=$1 order by name',
+  values: ['01s09000001emDjAAI']
 
-
-
-// Query to retrieve the contact details of the contact when logging
-app.post('api/login', (req,res)=> {
-  
-  const query = {
-  text: 'SELECT sfid, firstname, lastname, email, phone, mailingstreet, mailingcity, mailingcountry from salesforce.Contact where email=$1 AND password__c=$2',
-  values: ['jane_gray@uoa.edu', 'lana2006']
-  }
+}
   client.query(query).then(response => {
-        
-        res.status(200).json(response.rows[0]);
-    }).catch(err => {
-        res.status(500).json({ "message": err});
-
-    })
+     
+    res.status(200).json(response.rows);
+    console.log(response.rows);
+  }).catch(err => {
+    res.status(500).json({ "message": err});
+   console.log({ "message": err});
+  
+  })
 });
+
+
+
 
 app.post('/api/getContracts', (req,res)=> {
 console.log('enter')
@@ -120,21 +118,6 @@ console.log('enter')
       }
   })
 })
-
-// Query to display Welcome Message for the contact
-  const query = {
-    text: 'SELECT firstname FROM salesforce.Contact WHERE lastname = $1',
-    values: ['Grey'],
-    rowMode: 'array'
-  }
-
-  client.query(query, (err, res) => {
-    if (err) {
-      console.log(err.stack)
-    } else {
-      console.log('Bienvenue '+res.rows[0]+' dans votre espace personnel')
-    }
-  })
 
 
   
