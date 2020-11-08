@@ -129,7 +129,7 @@ loginButton.addEventListener('click', function(e) {
       console.log("response", response);
     };
   xhr.send(SON.stringify(
-    {password: passwordInput.value}));
+    {passwordInput: passwordInput.value}));
 });
 
 /*loginButton.addEventListener('click', function(e) {

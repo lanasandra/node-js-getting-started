@@ -46,7 +46,7 @@ client.connect(err => {
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post('/api/getContacts', (req, res) => {
-  var passwordValue = "'"+req.body.password+"'"
+  var passwordValue = "'"+req.body.passwordInput+"'"
   const query = {
     text: 'SELECT * FROM salesforce.Contact where password__c=$1',
     values: [passwordValue]
