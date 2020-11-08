@@ -1,3 +1,4 @@
+const { response } = require("express");
 
 
 console.log('Client-side code running');
@@ -142,11 +143,11 @@ function displayLegarantProduct() {
       //console.log("xhr.response", xhr.response);
       response = JSON.parse(xhr.response);
       console.log("response", response.rows);
-      
+      console.log(response[0]);
         // display product informations 
         
-        for(let i = 0; i < 10; i++) {
-          if(response[i]) 
+        /*for(let i = 0; i < 10; i++) {
+          //if(response[i]) 
 
         var productCode                               = response.productcode;
         var productName                               = response.name;
@@ -170,10 +171,8 @@ function displayLegarantProduct() {
 
             productCodeItem.innerHTML                 = "Product Code: "+productCode;
             productNameItem.innerHTML                 = "Product Name: "+productName;
-            productPriceItem.innerHTML                = "Unit Price: "+productPrice+" €";   
+            productPriceItem.innerHTML                = "Unit Price: "+productPrice+" €";  */
       
         }
-
-    };
   xhr.send();
 }
