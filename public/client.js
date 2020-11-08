@@ -175,6 +175,13 @@ function displayProducts(product){
 
       productCodeItem.innerHTML                 = "Product Code: "+productCode;
       productNameItem.innerHTML                 = "Product Name: "+productName;
-      productPriceItem.innerHTML                = "Unit Price: "+productPrice+" €";  
+      productPriceItem.innerHTML                = "Unit Price: "+euro.format(productPrice);  
 
 }
+
+// Formating the product price
+const euro = new Intl.NumberFormat('en-EN', {
+  style: 'currency',
+  currency: 'EUR',
+  minimumFractionDigits: 2
+});
