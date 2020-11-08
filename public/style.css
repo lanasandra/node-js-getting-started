@@ -91,6 +91,12 @@ text-align: left;
   margin-right: 5px;
 }
 
+.productItem
+{
+  background: linear-gradient(0deg, #46871f 0%, #6dc731 100%);
+  border: none;
+  border-radius: 5px;
+}
 [contenteditable]:focus {
   outline: 5px solid transparent;
   color: green;

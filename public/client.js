@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 console.log('Client-side code running');
 
 // Variables
@@ -86,6 +88,8 @@ loginButton.addEventListener('click', function(e) {
         // display contact informations 
         welcomePage.style.display="none";
         informationsPage.style.display="block";
+
+        document.getElementById("welcomePersonalSpace").innertHTML = "Welcome "+response.firstname+" to your personal space";
        
         document.getElementById("salesFirstName").innerHTML   = response.firstname
         document.getElementById("salesLastName").innerHTML    = response.lastname
@@ -101,8 +105,6 @@ loginButton.addEventListener('click', function(e) {
   xhr.send(JSON.stringify({
     password: passwordInput.value}));
 });
-
-
 
 
 function displayContractDetails(salesforceId){
@@ -150,7 +152,7 @@ function displayLegarantProduct() {
   xhr.send();
 }
 
-function displayProducts(product) {
+function displayProducts(product){
 
   var productCode                                 = product.productcode;
   var productName                                 = product.name;
