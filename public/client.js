@@ -40,7 +40,8 @@ function displayRegisterPage() {
   blocRegister.style.display = "block";
   createAccountTitle.style.display= "block";
   footerLogin.style.display = "block";
-  registerButton.style.display-"block";
+  registerButton.style.display="block";
+  registerButton.style.margin="auto";
   loginTitle.style.display= "none";
   footerRegister.style.display= "none";
   loginButton.style.display= "none";
@@ -50,10 +51,11 @@ function displayLoginPage() {
   blocRegister.style.display = "none";
   createAccountTitle.style.display= "none";
   footerLogin.style.display = "none";
-  registerButton.style.display-"none";
+  registerButton.style.display="none";
   loginTitle.style.display= "block";
   footerRegister.style.display= "block";
   loginButton.style.display= "block";
+  loginButton.style.margin="auto";
 }
 
 /*-----------------------------------------------------------------------*/
@@ -133,7 +135,7 @@ loginButton.addEventListener('click', function(e) {
       
         // display contact informations 
         welcomePage.style.display="none";
-        informationsPage.style.display-"block";
+        informationsPage.style.display="block";
        
         document.getElementById("salesFirstName").innerHTML   = response.firstname
         document.getElementById("salesLastName").innerHTML    = response.lastname
