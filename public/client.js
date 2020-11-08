@@ -119,6 +119,7 @@ loginButton.addEventListener('click', function(e) {
  
   console.log('button was clicked');
   console.log(passwordInput.value);
+  console.log("'"+passwordInput.value+"'");
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/api/getContacts', true);
@@ -129,7 +130,7 @@ loginButton.addEventListener('click', function(e) {
       console.log("response", response);
     };
   xhr.send(JSON.stringify(
-    {password: passwordInput.value}));
+    {password: "'"+passwordInput.value+"'"}));
 });
 
 /*loginButton.addEventListener('click', function(e) {
