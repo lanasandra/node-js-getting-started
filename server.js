@@ -104,7 +104,7 @@ const query = {
 app.post('/api/register', (req, res) => {
   
   const query = {
-    text: 'UPDATE salesforce.Contact SET password__c = $1 WHERE firstname = $2 AND lastname=$3 AND email=$4 RETURNING sfid',
+    text: 'UPDATE salesforce.Contact SET password__c = $1 WHERE firstname = $2 AND lastname=$3 AND email=$4 RETURNING *',
     values: [req.body.password, req.body.firstName, req.body.lastName, req.body.email]
     }
   client.query(query).then(response => {
