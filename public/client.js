@@ -20,7 +20,7 @@ var blocLogin = document.getElementById("blocLogin");
 const updateButton = document.getElementById("updateButton");
 var blocProductDetails = document.getElementById("blocProductDetails")
 var welcomePage = document.getElementById("welcomePage");
-var informationPage = document.getElementById("informationsPage")
+var informationsPage = document.getElementById("informationsPage")
 /*-----------------------------------------------------------------------*/
 
 // For test
@@ -128,20 +128,20 @@ loginButton.addEventListener('click', function(e) {
       // do something to response
       //console.log("xhr.response", xhr.response);
       response = JSON.parse(xhr.response);
-      console.log("response", response);
+      console.log("response", response[0].firstname);
 
       
         // display contact informations 
         welcomePage.style.display="none";
-        informationPage.style.display-"block";
+        informationsPage.style.display-"block";
        
-        document.getElementById("salesFirstName").innerHTML   = response.firstname
-        document.getElementById("salesLastName").innerHTML    = response.lastname
-        document.getElementById("salesEmail").innerHTML       = response.email
-        document.getElementById("salesPhoneNumber").innerHTML = response.phone
-        document.getElementById("salesStreet").innerHTML      = response.mailingstreet
-        document.getElementById("salesCity").innerHTML        = response.mailingcity
-        document.getElementById("salesCountry").innerHTML     = response.mailingcountry
+        //document.getElementById("salesFirstName").innerHTML   = response.firstname
+        //document.getElementById("salesLastName").innerHTML    = response.lastname
+       // document.getElementById("salesEmail").innerHTML       = response.email
+        //document.getElementById("salesPhoneNumber").innerHTML = response.phone
+        //document.getElementById("salesStreet").innerHTML      = response.mailingstreet
+       // document.getElementById("salesCity").innerHTML        = response.mailingcity
+       // document.getElementById("salesCountry").innerHTML     = response.mailingcountry
        
   
 
