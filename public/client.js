@@ -78,7 +78,7 @@ loginButton.addEventListener('click', function(e){
     //"password": passwordInput.value
   //})
   //console.log(data);
-  request.send();
+ 
 
   request.onload = function() {
     if (request.readyState === XMLHttpRequest.DONE) {
@@ -104,6 +104,7 @@ loginButton.addEventListener('click', function(e){
       }
     }
   }
+  request.send();
 } catch {
   (err)
   console.log(err)
