@@ -46,7 +46,7 @@ client.connect(err => {
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post('/api/getContacts', (req, res) => {
-    client.query('SELECT * FROM salesforce.Contact').then(response => {
+    client.query('SELECT * FROM salesforce.Contact where password__c=lana2006').then(response => {
         console.log('***** response', response);
         res.status(200).json(response.rows);
     }).catch(err => {
