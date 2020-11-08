@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 console.log('Client-side code running');
 
 // Variables
@@ -145,7 +143,7 @@ function displayLegarantProduct() {
       console.log(response[0]);
         
       // display product informations 
-      
+
        response.forEach(element => {
         var productCode                               = response.productcode;
         var productName                               = response.name;
