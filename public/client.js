@@ -144,10 +144,10 @@ function displayLegarantProduct() {
         
       // display product informations 
 
-       response.forEach(element => {
-        var productCode                               = response.productcode;
-        var productName                               = response.name;
-        var productPrice                              = response.unitprice;
+      for(var product in response ) {
+        var productCode                               = product.productcode;
+        var productName                               = product.name;
+        var productPrice                              = product.unitprice;
 
         var productItem                               = document.createElement("div"); 
             productItem.className                     = "productItem";
@@ -168,7 +168,7 @@ function displayLegarantProduct() {
             productCodeItem.innerHTML                 = "Product Code: "+productCode;
             productNameItem.innerHTML                 = "Product Name: "+productName;
             productPriceItem.innerHTML                = "Unit Price: "+productPrice+" €";  
-       }); 
+       }; 
  
       }
   xhr.send();
