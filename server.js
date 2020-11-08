@@ -46,13 +46,19 @@ client.connect(err => {
 // Creation d'une route POST 
 // https://still-stream-63740.herokuapp.com/api/getAccounts
 app.post('/api/getContacts', (req, res) => {
-    client.query('SELECT * FROM salesforce.Contact where password__c=lana2006').then(response => {
-        console.log('***** response', response);
-        res.status(200).json(response.rows);
-    }).catch(err => {
-        res.status(500).json({ "message": err});
-
-    })
+  const query = {
+    text: 'SELECT * FROM salesforce.Contact where password__c=$1',
+    values: ['lana2006']
+  }
+  client.query(query).then(response => {
+     
+    res.status(200).json(response.rows);
+    console.log(response.rows);
+  }).catch(err => {
+    res.status(500).json({ "message": err});
+   console.log({ "message": err});
+  
+  })
 });
 
 // test
@@ -307,6 +313,8 @@ app.post('/', function(req, res) {
         );
     });
 });*/
+
+
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
