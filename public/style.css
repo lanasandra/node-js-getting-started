@@ -117,8 +117,15 @@ text-align: left;
 #salesFirstName, #salesLastName, #salesEmail, #salesPhoneNumber, #salesStreet, #salesCity, #salesCountry
 {
   border: none;
-  
+  border-width:0px;
+  background-color: #F5F5F5;
+  color: grey;
+  padding-left: 10px;
+  margin-left: 5px;
+
 }
+
+
 
 #informationsPage
 {

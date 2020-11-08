@@ -87,15 +87,15 @@ loginButton.addEventListener('click', function(e) {
         welcomePage.style.display="none";
         informationsPage.style.display="block";
 
-        document.getElementById("welcomePersonalSpace").innertHTML = "Welcome "+response.firstname+" to your personal space";
+        document.getElementById("welcomePersonalSpace").textContent = "Welcome "+response.firstname+" to your personal space";
         console.log("Welcome "+response.firstname+" to your personal space");
-        document.getElementById("salesFirstName").innerHTML   = response.firstname
-        document.getElementById("salesLastName").innerHTML    = response.lastname
-        document.getElementById("salesEmail").innerHTML       = response.email
-        document.getElementById("salesPhoneNumber").innerHTML = response.phone
-        document.getElementById("salesStreet").innerHTML      = response.mailingstreet
-        document.getElementById("salesCity").innerHTML        = response.mailingcity
-        document.getElementById("salesCountry").innerHTML     = response.mailingcountry
+        document.getElementById("salesFirstName").value   = response.firstname
+        document.getElementById("salesLastName").value    = response.lastname
+        document.getElementById("salesEmail").value       = response.email
+        document.getElementById("salesPhoneNumber").value = response.phone
+        document.getElementById("salesStreet").valueL      = response.mailingstreet
+        document.getElementById("salesCity").value        = response.mailingcity
+        document.getElementById("salesCountry").value     = response.mailingcountry
        
   
 
