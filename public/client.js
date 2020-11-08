@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 console.log('Client-side code running');
 
 // Variables
@@ -143,12 +145,12 @@ function displayLegarantProduct() {
       console.log(response[0]);
         
       // display product informations 
-        
+        if(response.length > 0) {
         for(let i = 0; i < 10; i++) {
 
-        var productCode                               = response.productcode[i];
-        var productName                               = response.name[i];
-        var productPrice                              = response.unitprice[i];
+        var productCode                               = response[i].productcode;
+        var productName                               = response[i].name;
+        var productPrice                              = response[i].unitprice;
 
         var productItem                               = document.createElement("div"); 
             productItem.className                     = "productItem";
@@ -171,6 +173,7 @@ function displayLegarantProduct() {
             productPriceItem.innerHTML                = "Unit Price: "+productPrice+" €";  
       
         }
+      }
       }
   xhr.send();
 }
