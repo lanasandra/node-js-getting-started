@@ -129,7 +129,7 @@ loginButton.addEventListener('click', function(e) {
       console.log("response", response);
     };
   xhr.send({
-    "password": passwordInput.value
+    password: passwordInput.value
   });
 });
 
