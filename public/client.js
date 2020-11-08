@@ -60,61 +60,7 @@ function displayLoginPage() {
 
 /*-----------------------------------------------------------------------*/
 
-
-
 // Action on Login Button
-
-/*loginButton.addEventListener('click', function(e){
-  e.preventDefault();
-
-  //console.log(emailInput.value, passwordInput.value)
-
-  try {
-  
-    let request = new XMLHttpRequest();
-  request.open('POST', 'api/login', true);
-  request.setRequestHeader('Content-Type', 'application/json');
-  request.responseType = 'json';
-  //var data = JSON.stringify({
-    //"username": emailInput.value,
-    //"password": passwordInput.value
-  //})
-  //console.log(data);
- 
-
-  request.onload = function() {
-    if (request.readyState === XMLHttpRequest.DONE) {
-      if (request.status === 200) {
-        let response = Parse.JSON(request.response);
-        console.log(response);
-      
-        // display contact informations 
-        welcomePage.style.display="none";
-        informationPage.style.display-"block";
-        response.forEach((contact) => {
-        console.log(contact.firstname, contact.lastname, contact.email, contact.phone, contact.mailingstreet, contact.mailingcity, contact.mailingcountry)
-        document.getElementById("salesFirstName").innerHTML   = contact.firstname
-        document.getElementById("salesLastName").innerHTML    = contact.lastname
-        document.getElementById("salesEmail").innerHTML       = contact.email
-        document.getElementById("salesPhoneNumber").innerHTML = contact.phone
-        document.getElementById("salesStreet").innerHTML      = contact.mailingstreet
-        document.getElementById("salesCity").innerHTML        = contact.mailingcity
-        document.getElementById("salesCountry").innerHTML     = contact.mailingcountry
-        })
-      } else {
-      alert('Un problème est intervenu, merci de revenir plus tard.');
-      }
-    }
-  }
-  request.send();
-} catch {
-  (err)
-  console.log(err)
-}
-})*/
-
-
-// Http Requests TEST
 
 loginButton.addEventListener('click', function(e) {
   e.preventDefault();
@@ -131,6 +77,9 @@ loginButton.addEventListener('click', function(e) {
       //console.log("xhr.response", xhr.response);
       response = JSON.parse(xhr.response);
       console.log("response", response.firstname);
+
+      // Call function to display contract details
+        displayContractDetails(response.sfid);
 
       
         // display contact informations 
@@ -152,89 +101,34 @@ loginButton.addEventListener('click', function(e) {
     password: passwordInput.value}));
 });
 
-/*loginButton.addEventListener('click', function(e) {
-  e.preventDefault();
- 
-  console.log('button was clicked');
 
-  //On appelle notre route créée sur le serveur
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/api/login', true);
-  xhr.onload = function () {
-      // do something to response
-      console.log("xhr.response", xhr.response);
-      response = JSON.parse(xhr.response);
-      console.log("response", response);
-    };
-  xhr.send();
-});
 
-*/
-
-// request to display contact details section based on Sfid
-function displayContactDetails(salesforceId){
-
-// Create a request variable and assign a new XMLHttpRequest object to it.
-var request = new XMLHttpRequest()
-
-// Open a new connection, using the GET request on the URL endpoint
-request.open('POST', 'api/getContact/id='+salesforceId, true)
-
-request.onload = function () {
-  // Begin accessing JSON data here
-  var data = JSON.parse(this.response)
-
-  if (request.status >= 200 && request.status < 400) {
-
-    
-    data.forEach((contact) => {
-      console.log(contact.firstname, contact.lastname, contact.email, contact.phone, contact.mailingstreet, contact.mailingcity, contact.mailingcountry)
-      document.getElementById("salesFirstName").innerHTML   = contact.firstname
-      document.getElementById("salesLastName").innerHTML    = contact.lastname
-      document.getElementById("salesEmail").innerHTML       = contact.email
-      document.getElementById("salesPhoneNumber").innerHTML = contact.phone
-      document.getElementById("salesStreet").innerHTML      = contact.mailingstreet
-      document.getElementById("salesCity").innerHTML        = contact.mailingcity
-      document.getElementById("salesCountry").innerHTML     = contact.mailingcountry
-    })
-  } else {
-    console.log('error')
-  }
-}
-// Send request
-request.send()
-}
 
 function displayContractDetails(salesforceId){
 
-  // Create a request variable and assign a new XMLHttpRequest object to it.
-  var request = new XMLHttpRequest()
-  
-  // Open a new connection, using the POST request on the URL endpoint
-  request.open('POST', 'api/getContract/id='+salesforceId, true)
-  
-  request.onload = function () {
-    // Begin accessing JSON data here
-    var data = JSON.parse(this.response)
-  
-    if (request.status >= 200 && request.status < 400) {
-      data.forEach((contract) => {
-        console.log(contract.contractnumber, contract.startdate, contract.enddate, contract.contractterm)
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/getContract', true);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.onload = function () {
+      // do something to response
+      //console.log("xhr.response", xhr.response);
+      response = JSON.parse(xhr.response);
+      console.log("response", response);
+      
+        // display contract informations 
+        
         document.getElementById("contactContractNumber").innerHTML    = "Contract Number: "+contract.contractnumber;
         document.getElementById("contactContractStartDate").innerHTML = "Contract Start Date: "+contract.startdate;
         document.getElementById("contactContractEndDate").innerHTML   = "Contract End Date: "+contract.enddate;
         document.getElementById("contactContractTerm").innerHTML      = "Contract Term (months): "+contract.contractnumber;
-    })
-  } else {
-        
-        console.log('error')
-  }
+       
   
-  // Send request
-  request.send()
 
-  }
-}
+    };
+  xhr.send(JSON.stringify({
+    sfid: salesforceId}));
+};
+
  
 function displayLegarantProduct() {
 

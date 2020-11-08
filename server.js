@@ -43,13 +43,30 @@ client.connect(err => {
   })
 
 
-// Creation d'une route POST 
-// https://still-stream-63740.herokuapp.com/api/getAccounts
+// Creation d'une route POST pour récupérer mon contact
 app.post('/api/getContacts', (req, res) => {
   
   const query = {
     text: 'SELECT * FROM salesforce.Contact where password__c=$1',
     values: [req.body.password]
+    }
+  client.query(query).then(response => {
+     
+    res.status(200).json(response.rows[0]);
+    console.log(response.rows);
+  }).catch(err => {
+    res.status(500).json({ "message": err});
+   console.log({ "message": err});
+  
+  })
+});
+
+// Creation d'une route POST pour récupérer mon contrat
+app.post('/api/getContract', (req, res) => {
+  
+  const query = {
+    text: 'SELECT contractnumber, startdate, enddate, contractterm from salesforce.Contract where customersignedid=$1',
+    values: [req.body.sfid]
     }
   client.query(query).then(response => {
      
