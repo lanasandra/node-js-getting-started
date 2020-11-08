@@ -58,8 +58,9 @@ function displayLoginPage() {
 
 /*-----------------------------------------------------------------------*/
 
-// Action on Login Button
+// Requests on buttons
 
+// Log a contact already registered
 loginButton.addEventListener('click', function(e) {
   e.preventDefault();
  
@@ -68,7 +69,7 @@ loginButton.addEventListener('click', function(e) {
   //console.log("'"+passwordInput.value+"'");
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/api/getContacts', true);
+  xhr.open('POST', '/api/getContact', true);
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.onload = function () {
       // do something to response
@@ -88,23 +89,25 @@ loginButton.addEventListener('click', function(e) {
         informationsPage.style.display="block";
 
         document.getElementById("welcomePersonalSpace").textContent = "Welcome "+response.firstname+" to your personal space";
-        console.log("Welcome "+response.firstname+" to your personal space");
-        document.getElementById("salesFirstName").value   = response.firstname
-        document.getElementById("salesLastName").value    = response.lastname
-        document.getElementById("salesEmail").value       = response.email
-        document.getElementById("salesPhoneNumber").value = response.phone
-        document.getElementById("salesStreet").value      = response.mailingstreet
-        document.getElementById("salesCity").value        = response.mailingcity
-        document.getElementById("salesCountry").value     = response.mailingcountry
        
+        document.getElementById("salesFirstName").value             = response.firstname
+        document.getElementById("salesLastName").value              = response.lastname
+        document.getElementById("salesEmail").value                 = response.email
+        document.getElementById("salesPhoneNumber").value           = response.phone
+        document.getElementById("salesStreet").value                = response.mailingstreet
+        document.getElementById("salesCity").value                  = response.mailingcity
+        document.getElementById("salesCountry").value               = response.mailingcountry
+        document.getElementById("salesSalesforceId").value          = response.sfid
   
 
     };
   xhr.send(JSON.stringify({
-    password: passwordInput.value}));
+    password: passwordInput.value,
+    email: emailInput.value
+  }));
 });
 
-
+// Register a new contact
 registerButton.addEventListener('click', function(e){
   e.preventDefault();
  
@@ -122,7 +125,7 @@ registerButton.addEventListener('click', function(e){
       console.log("response", response.sfid);
 
       alert("Votre mot de passe a bien été enregistré !");
-      
+
       // Call function to display contract details
         displayContractDetails(response.sfid);
 
@@ -135,15 +138,15 @@ registerButton.addEventListener('click', function(e){
         informationsPage.style.display="block";
 
         document.getElementById("welcomePersonalSpace").textContent = "Welcome "+response.firstname+" to your personal space";
-        console.log("Welcome "+response.firstname+" to your personal space");
-        document.getElementById("salesFirstName").value   = response.firstname
-        document.getElementById("salesLastName").value    = response.lastname
-        document.getElementById("salesEmail").value       = response.email
-        document.getElementById("salesPhoneNumber").value = response.phone
-        document.getElementById("salesStreet").value      = response.mailingstreet
-        document.getElementById("salesCity").value        = response.mailingcity
-        document.getElementById("salesCountry").value     = response.mailingcountry
-       
+        
+        document.getElementById("salesFirstName").value             = response.firstname
+        document.getElementById("salesLastName").value              = response.lastname
+        document.getElementById("salesEmail").value                 = response.email
+        document.getElementById("salesPhoneNumber").value           = response.phone
+        document.getElementById("salesStreet").value                = response.mailingstreet
+        document.getElementById("salesCity").value                  = response.mailingcity
+        document.getElementById("salesCountry").value               = response.mailingcountry
+        document.getElementById("salesSalesforceId").value          = response.sfid
   
 
     };
@@ -154,6 +157,37 @@ registerButton.addEventListener('click', function(e){
     email: emailInput.value
     }));
 });
+
+// Update contacts details
+updateButton.addEventListener('click', function(e){
+  e.preventDefault();
+ 
+  console.log('button was clicked');
+  
+
+  //On appelle notre route créée sur le serveur
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/update', true);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.onload = function () {
+      // do something to response
+      //console.log("xhr.response", xhr.response);
+      
+        document.getElementById("updateMessage").textContent = "Your contact details have been updated !"
+
+    };
+  xhr.send(JSON.stringify({
+    firstName: document.getElementById("salesFirstName").value,
+    lastName: document.getElementById("salesLastName").value,
+    email: document.getElementById("salesEmail").value,
+    phone:  document.getElementById("salesPhoneNumber").value,
+    mailingStreet: document.getElementById("salesStreet").value,
+    mailingCity:document.getElementById("salesCity").value,
+    mailingCountry:  document.getElementById("salesCountry").value,
+    salesforcId:  document.getElementById("salesSalesforceId").value
+    }));
+});
+
 
 
 

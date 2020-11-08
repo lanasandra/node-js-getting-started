@@ -115,10 +115,17 @@ text-align: left;
 
 #salesStreet
 {
-  width: 280px;
+  width: 350px;
 }
 
-#informationsPage
+
+#informationsPage, #salesSalesforceId
 {
   display:none;
+}
+
+#updateMessage
+{
+  font-family: 'Source Sans Pro', arial, sans-serif;
+  color: green;
 }
