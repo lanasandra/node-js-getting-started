@@ -62,7 +62,7 @@ function displayLoginPage() {
 
 // Action on Login Button
 
-loginButton.addEventListener('click', function(e){
+/*loginButton.addEventListener('click', function(e){
   e.preventDefault();
 
   //console.log(emailInput.value, passwordInput.value)
@@ -109,12 +109,12 @@ loginButton.addEventListener('click', function(e){
   (err)
   console.log(err)
 }
-})
+})*/
 
 
 // Http Requests TEST
 
-getContactNumbers.addEventListener('click', function(e) {
+loginButton.addEventListener('click', function(e) {
   e.preventDefault();
  
   console.log('button was clicked');
