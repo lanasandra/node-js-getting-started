@@ -119,7 +119,7 @@ loginButton.addEventListener('click', function(e) {
  
   console.log('button was clicked');
   console.log(passwordInput.value);
-  console.log("'"+passwordInput.value+"'");
+  //console.log("'"+passwordInput.value+"'");
   //On appelle notre route créée sur le serveur
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/api/getContacts', true);
@@ -129,6 +129,23 @@ loginButton.addEventListener('click', function(e) {
       //console.log("xhr.response", xhr.response);
       response = JSON.parse(xhr.response);
       console.log("response", response);
+
+      
+        // display contact informations 
+        welcomePage.style.display="none";
+        informationPage.style.display-"block";
+        response.forEach((contact) => {
+        console.log(contact.firstname, contact.lastname, contact.email, contact.phone, contact.mailingstreet, contact.mailingcity, contact.mailingcountry)
+        document.getElementById("salesFirstName").innerHTML   = contact.firstname
+        document.getElementById("salesLastName").innerHTML    = contact.lastname
+        document.getElementById("salesEmail").innerHTML       = contact.email
+        document.getElementById("salesPhoneNumber").innerHTML = contact.phone
+        document.getElementById("salesStreet").innerHTML      = contact.mailingstreet
+        document.getElementById("salesCity").innerHTML        = contact.mailingcity
+        document.getElementById("salesCountry").innerHTML     = contact.mailingcountry
+        })
+  
+
     };
   xhr.send(JSON.stringify({
     password: passwordInput.value}));
